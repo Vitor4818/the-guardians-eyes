@@ -9,4 +9,7 @@ public class LocalModel
     public required string Municipio { get; set; }
     public required string Numero { get; set; }
 
+        // Desastres relacionados ao Local
+    public ICollection<DesastreModel>? Desastres { get; set; }
+
 }

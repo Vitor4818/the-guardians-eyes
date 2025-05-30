@@ -11,5 +11,8 @@ public class DroneModel
     public required int VelocidadeMaxima { get; set; }
     public required string Camera { get; set; }
     public required int Peso { get; set; }
+
+    // Navegação para Imagens
+    public ICollection<ImagensCapturadasModel>? ImagensCapturadas { get; set; }
     
 }

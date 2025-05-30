@@ -7,5 +7,8 @@ public class ImpactoClassificacaoModel
     public required int Nivel { get; set; }
     public required string DescNivel { get; set; }
 
+        // Desastres que possuem essa classificação
+    public ICollection<DesastreModel>? Desastres { get; set; }
+
     
 }

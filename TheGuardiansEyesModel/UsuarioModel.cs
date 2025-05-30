@@ -11,5 +11,8 @@ public class UsuarioModel
     public required string Funcao { get; set; }
     public required string Email { get; set; }
     public required string Senha { get; set; }
+
+        // Desastres criados/relacionados ao usuário
+    public ICollection<DesastreModel>? Desastres { get; set; }
     
 }

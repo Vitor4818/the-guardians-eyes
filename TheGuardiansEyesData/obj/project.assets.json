@@ -1077,19 +1077,6 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "TheGuardiansEyesBusiness/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v9.0",
-        "dependencies": {
-          "TheGuardiansEyesModel": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/TheGuardiansEyesBusiness.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/TheGuardiansEyesBusiness.dll": {}
-        }
-      },
       "TheGuardiansEyesModel/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
@@ -3261,11 +3248,6 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "TheGuardiansEyesBusiness/1.0.0": {
-      "type": "project",
-      "path": "../TheGuardiansEyesBusiness/TheGuardiansEyesBusiness.csproj",
-      "msbuildProject": "../TheGuardiansEyesBusiness/TheGuardiansEyesBusiness.csproj"
-    },
     "TheGuardiansEyesModel/1.0.0": {
       "type": "project",
       "path": "../TheGuardiansEyesModel/TheGuardiansEyesModel.csproj",
@@ -3278,7 +3260,6 @@
       "Microsoft.EntityFrameworkCore.Design >= 9.0.5",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.5",
       "Oracle.EntityFrameworkCore >= 9.23.80",
-      "TheGuardiansEyesBusiness >= 1.0.0",
       "TheGuardiansEyesModel >= 1.0.0"
     ]
   },
@@ -3315,9 +3296,6 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\vitor\\Documents\\.NET fiap\\the-angel-eyes\\TheGuardiansEyesBusiness\\TheGuardiansEyesBusiness.csproj": {
-              "projectPath": "C:\\Users\\vitor\\Documents\\.NET fiap\\the-angel-eyes\\TheGuardiansEyesBusiness\\TheGuardiansEyesBusiness.csproj"
-            },
             "C:\\Users\\vitor\\Documents\\.NET fiap\\the-angel-eyes\\TheGuardiansEyesModel\\TheGuardiansEyesModel.csproj": {
               "projectPath": "C:\\Users\\vitor\\Documents\\.NET fiap\\the-angel-eyes\\TheGuardiansEyesModel\\TheGuardiansEyesModel.csproj"
             }
