@@ -706,6 +706,8 @@
       "System.Threading.Channels/7.0.0": {},
       "TheGuardiansEyesBusiness/1.0.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": "9.0.5",
+          "TheGuardiansEyesData": "1.0.0",
           "TheGuardiansEyesModel": "1.0.0"
         },
         "runtime": {
@@ -719,7 +721,6 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "9.0.5",
           "Oracle.EntityFrameworkCore": "9.23.80",
-          "TheGuardiansEyesBusiness": "1.0.0",
           "TheGuardiansEyesModel": "1.0.0"
         },
         "runtime": {

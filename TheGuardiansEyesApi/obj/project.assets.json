@@ -1107,6 +1107,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": "9.0.5",
+          "TheGuardiansEyesData": "1.0.0",
           "TheGuardiansEyesModel": "1.0.0"
         },
         "compile": {
@@ -1122,7 +1124,6 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "9.0.5",
           "Oracle.EntityFrameworkCore": "9.23.80",
-          "TheGuardiansEyesBusiness": "1.0.0",
           "TheGuardiansEyesModel": "1.0.0"
         },
         "compile": {

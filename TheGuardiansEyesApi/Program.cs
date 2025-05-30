@@ -1,5 +1,6 @@
 using TheGuardiansEyesData;
 using Microsoft.EntityFrameworkCore;
+using TheGuardiansEyesBusiness;
 
 using Oracle.EntityFrameworkCore;
 
@@ -9,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseOracle(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
