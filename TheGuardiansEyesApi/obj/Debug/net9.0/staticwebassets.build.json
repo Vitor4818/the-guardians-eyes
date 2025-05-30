@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "dT0UbEc/tQLw0NtMpzRjr5OVyTjycMg9x4jmi4BGEsQ=",
+  "Source": "TheGuardiansEyesApi",
+  "BasePath": "_content/TheGuardiansEyesApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

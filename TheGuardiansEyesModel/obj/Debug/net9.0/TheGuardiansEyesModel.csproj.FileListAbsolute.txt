@@ -1,0 +1,12 @@
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesModel\bin\Debug\net9.0\TheGuardiansEyesModel.deps.json
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesModel\bin\Debug\net9.0\TheGuardiansEyesModel.dll
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesModel\bin\Debug\net9.0\TheGuardiansEyesModel.pdb
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesModel\obj\Debug\net9.0\TheGuardiansEyesModel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesModel\obj\Debug\net9.0\TheGuardiansEyesModel.AssemblyInfoInputs.cache
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesModel\obj\Debug\net9.0\TheGuardiansEyesModel.AssemblyInfo.cs
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesModel\obj\Debug\net9.0\TheGuardiansEyesModel.csproj.CoreCompileInputs.cache
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesModel\obj\Debug\net9.0\TheGuardiansEyesModel.sourcelink.json
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesModel\obj\Debug\net9.0\TheGuardiansEyesModel.dll
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesModel\obj\Debug\net9.0\refint\TheGuardiansEyesModel.dll
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesModel\obj\Debug\net9.0\TheGuardiansEyesModel.pdb
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesModel\obj\Debug\net9.0\ref\TheGuardiansEyesModel.dll
