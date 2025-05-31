@@ -16,10 +16,13 @@ public class ImagensCapturadasModel
     public LocalModel? Local { get; set; }
 
     // FK para ImpactoClassificacao
-    public  int? IdImpactoClassificacao { get; set; }
+    public int? IdImpactoClassificacao { get; set; }
     public ImpactoClassificacaoModel? ImpactoClassificacao { get; set; }
 
     // FK para Drone
     public required int IdDrone { get; set; }
     public DroneModel? Drone { get; set; }
+    public  int IdDesastre { get; set; }
+    [JsonIgnore]
+    public DesastreModel? Desastre { get; set; }
 }

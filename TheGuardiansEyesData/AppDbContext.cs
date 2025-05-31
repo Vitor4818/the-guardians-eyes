@@ -25,21 +25,21 @@ namespace TheGuardiansEyesData
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-        modelBuilder.Entity<ImpactoClassificacaoModel>().HasData(
-            new ImpactoClassificacaoModel { Id = 1, Nivel = 1, DescNivel = "Leve" },
-            new ImpactoClassificacaoModel { Id = 2, Nivel = 2, DescNivel = "Moderado" },
-            new ImpactoClassificacaoModel { Id = 3, Nivel = 3, DescNivel = "Grave" }
-        );
+            modelBuilder.Entity<ImpactoClassificacaoModel>().HasData(
+                new ImpactoClassificacaoModel { Id = 1, Nivel = 1, DescNivel = "Leve" },
+                new ImpactoClassificacaoModel { Id = 2, Nivel = 2, DescNivel = "Moderado" },
+                new ImpactoClassificacaoModel { Id = 3, Nivel = 3, DescNivel = "Grave" }
+            );
 
-         modelBuilder.Entity<TerrenoGeograficoModel>().HasData(
-            new TerrenoGeograficoModel { Id = 1, NomeTerreno = "Montanha" },
-            new TerrenoGeograficoModel { Id = 2, NomeTerreno = "Planície" },
-            new TerrenoGeograficoModel { Id = 3, NomeTerreno = "Floresta" },
-            new TerrenoGeograficoModel { Id = 4, NomeTerreno = "Área Urbana" },
-            new TerrenoGeograficoModel { Id = 5, NomeTerreno = "Deserto" },
-            new TerrenoGeograficoModel { Id = 6, NomeTerreno = "Pantanal" },
-            new TerrenoGeograficoModel { Id = 7, NomeTerreno = "Litoral" }
-        );
+            modelBuilder.Entity<TerrenoGeograficoModel>().HasData(
+               new TerrenoGeograficoModel { Id = 1, NomeTerreno = "Montanha" },
+               new TerrenoGeograficoModel { Id = 2, NomeTerreno = "Planície" },
+               new TerrenoGeograficoModel { Id = 3, NomeTerreno = "Floresta" },
+               new TerrenoGeograficoModel { Id = 4, NomeTerreno = "Área Urbana" },
+               new TerrenoGeograficoModel { Id = 5, NomeTerreno = "Deserto" },
+               new TerrenoGeograficoModel { Id = 6, NomeTerreno = "Pantanal" },
+               new TerrenoGeograficoModel { Id = 7, NomeTerreno = "Litoral" }
+           );
 
 
             modelBuilder.Entity<ImpactoModel>()
@@ -47,26 +47,26 @@ namespace TheGuardiansEyesData
         .WithMany() // Sem coleção inversa por enquanto
         .HasForeignKey(i => i.ImpactoClassificacaoId);
 
-modelBuilder.Entity<ImagensCapturadasModel>()
-    .HasOne(i => i.Local)
-    .WithMany(l => l.ImagensCapturadas) // você pode criar essa propriedade no LocalModel
-    .HasForeignKey(i => i.IdLocal);
+            modelBuilder.Entity<ImagensCapturadasModel>()
+                .HasOne(i => i.Local)
+                .WithMany(l => l.ImagensCapturadas) // você pode criar essa propriedade no LocalModel
+                .HasForeignKey(i => i.IdLocal);
 
-modelBuilder.Entity<ImagensCapturadasModel>()
-    .HasOne(i => i.ImpactoClassificacao)
-    .WithMany()
-    .HasForeignKey(i => i.IdImpactoClassificacao);
+            modelBuilder.Entity<ImagensCapturadasModel>()
+                .HasOne(i => i.ImpactoClassificacao)
+                .WithMany()
+                .HasForeignKey(i => i.IdImpactoClassificacao);
 
-modelBuilder.Entity<ImagensCapturadasModel>()
-    .HasOne(i => i.Drone)
-    .WithMany()
-    .HasForeignKey(i => i.IdDrone);
+            modelBuilder.Entity<ImagensCapturadasModel>()
+                .HasOne(i => i.Drone)
+                .WithMany()
+                .HasForeignKey(i => i.IdDrone);
 
-                modelBuilder.Entity<DesastreModel>()
-        .HasOne(d => d.Local)
-        .WithMany(l => l.Desastres)
-        .HasForeignKey(d => d.IdLocal)
-        .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<DesastreModel>()
+    .HasOne(d => d.Local)
+    .WithMany(l => l.Desastres)
+    .HasForeignKey(d => d.IdLocal)
+    .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<DesastreModel>()
                 .HasOne(d => d.ImpactoClassificacao)
@@ -85,8 +85,13 @@ modelBuilder.Entity<ImagensCapturadasModel>()
                 .WithMany(u => u.Desastres)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.Restrict);
-    
 
+            modelBuilder.Entity<ImagensCapturadasModel>()
+                .HasOne(imagem => imagem.   Desastre)
+                .WithMany(desastre => desastre.ImagensCapturadas)
+                .HasForeignKey(imagem => imagem.IdDesastre)
+                .OnDelete(DeleteBehavior.Cascade);  // ou Restrict, conforme sua regra de negócio
+    
         }
 
         

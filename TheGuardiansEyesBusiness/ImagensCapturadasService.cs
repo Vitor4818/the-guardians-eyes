@@ -63,6 +63,7 @@ public class ImagensCapturadasService
             .Include(i => i.Local)
             .Include(i => i.ImpactoClassificacao)
             .Include(i => i.Drone)
+            .Include(i => i.Desastre) 
             .ToList();
     }
 

@@ -136,10 +136,13 @@ namespace TheGuardiansEyesData.Migrations
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
+                    b.Property<int>("IdDesastre")
+                        .HasColumnType("NUMBER(10)");
+
                     b.Property<int>("IdDrone")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int>("IdImpactoClassificacao")
+                    b.Property<int?>("IdImpactoClassificacao")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("IdLocal")
@@ -152,6 +155,8 @@ namespace TheGuardiansEyesData.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DroneModelId");
+
+                    b.HasIndex("IdDesastre");
 
                     b.HasIndex("IdDrone");
 
@@ -469,23 +474,29 @@ namespace TheGuardiansEyesData.Migrations
                         .WithMany("ImagensCapturadas")
                         .HasForeignKey("DroneModelId");
 
+                    b.HasOne("TheGuardiansEyesModel.DesastreModel", "Desastre")
+                        .WithMany("ImagensCapturadas")
+                        .HasForeignKey("IdDesastre")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("TheGuardiansEyesModel.DroneModel", "Drone")
                         .WithMany()
                         .HasForeignKey("IdDrone")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TheGuardiansEyesModel.ImpactoModel", "ImpactoClassificacao")
+                    b.HasOne("TheGuardiansEyesModel.ImpactoClassificacaoModel", "ImpactoClassificacao")
                         .WithMany()
-                        .HasForeignKey("IdImpactoClassificacao")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdImpactoClassificacao");
 
                     b.HasOne("TheGuardiansEyesModel.LocalModel", "Local")
                         .WithMany("ImagensCapturadas")
                         .HasForeignKey("IdLocal")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Desastre");
 
                     b.Navigation("Drone");
 
@@ -514,6 +525,11 @@ namespace TheGuardiansEyesData.Migrations
                         .IsRequired();
 
                     b.Navigation("GrupoDesastre");
+                });
+
+            modelBuilder.Entity("TheGuardiansEyesModel.DesastreModel", b =>
+                {
+                    b.Navigation("ImagensCapturadas");
                 });
 
             modelBuilder.Entity("TheGuardiansEyesModel.DroneModel", b =>

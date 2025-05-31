@@ -10,10 +10,17 @@ namespace TheGuardiansEyesApi.Controllers
     public class ImagensCapturadasController : ControllerBase
     {
         private readonly ImagensCapturadasService _imagemService;
+        private readonly DesastreService _desastreService;
+        private readonly LocalService _localService;
 
-        public ImagensCapturadasController(ImagensCapturadasService imagemService)
+        public ImagensCapturadasController(
+            ImagensCapturadasService imagemService,
+            DesastreService desastreService,
+            LocalService localService)
         {
             _imagemService = imagemService;
+            _desastreService = desastreService;
+            _localService = localService;
         }
 
         // GET: api/imagenscapturadas
@@ -32,18 +39,44 @@ namespace TheGuardiansEyesApi.Controllers
             return imagem == null ? NotFound() : Ok(imagem);
         }
 
-        // POST: api/imagenscapturadas
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ImagensCapturadasModel imagem)
-        {
-            if (imagem == null || imagem.IdDrone <= 0 || string.IsNullOrWhiteSpace(imagem.Hospedagem))
-            {
-                return BadRequest("Todos os campos obrigatórios devem ser preenchidos.");
-            }
 
-            var criada = await _imagemService.CadastrarImagemAsync(imagem);
-            return CreatedAtAction(nameof(Get), new { id = criada.Id }, criada);
-        }
+
+
+        // POST: api/imagenscapturadas
+     // POST: api/imagenscapturadas
+       [HttpPost]
+public async Task<IActionResult> Post([FromBody] ImagensCapturadasModel imagem)
+{
+    if (imagem == null || imagem.IdDrone <= 0 || string.IsNullOrWhiteSpace(imagem.Hospedagem))
+        return BadRequest("Todos os campos obrigatórios devem ser preenchidos.");
+
+    // Buscar local pelo IdLocal
+    var local = _localService.ObterPorId(imagem.IdLocal);
+    if (local == null)
+        return BadRequest("Local inválido.");
+
+    // Verificar se local tem latitude e longitude válidas
+    if (local.Latitude == 0 || local.Longitude == 0)
+        return BadRequest("Local não possui latitude e longitude válidas.");
+
+    // Buscar desastre mais próximo usando lat/lon do local
+    var desastreProximo = _desastreService.ObterDesastreMaisProximo(local.Latitude, local.Longitude);
+
+    if (desastreProximo == null)
+        return NotFound("Nenhum desastre próximo encontrado para a localização do local.");
+
+    // Atribuir IdDesastre e IdLocal na imagem
+    imagem.IdDesastre = desastreProximo.Id;
+    imagem.IdLocal = desastreProximo.IdLocal;
+
+    var criada = await _imagemService.CadastrarImagemAsync(imagem);
+    return CreatedAtAction(nameof(Get), new { id = criada.Id }, criada);
+}
+
+
+
+
+
 
         // PUT: api/imagenscapturadas/{id}
         [HttpPut("{id}")]

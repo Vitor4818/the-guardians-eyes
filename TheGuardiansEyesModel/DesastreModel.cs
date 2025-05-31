@@ -1,4 +1,6 @@
 namespace TheGuardiansEyesModel;
+using System.Text.Json.Serialization;
+
 
 public class DesastreModel
 {
@@ -9,7 +11,7 @@ public class DesastreModel
     public LocalModel? Local { get; set; }
 
     // FK e navegação para ImpactoClassificacao
-    public required int Impacto{ get; set; }
+    public required int Impacto { get; set; }
     public ImpactoModel? ImpactoClassificacao { get; set; }
 
     // FK e navegação para GrupoDesastre
@@ -22,5 +24,9 @@ public class DesastreModel
 
     public required int Cobrade { get; set; }
     public required string DataOcorrencia { get; set; }
+    
+    [JsonIgnore]
+    public ICollection<ImagensCapturadasModel>? ImagensCapturadas { get; set; }
+
 }
 
