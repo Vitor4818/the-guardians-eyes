@@ -18,8 +18,9 @@ namespace TheGuardiansEyesData
         public DbSet<ImagensCapturadasModel> ImagensCapturadas { get; set; }
         public DbSet<ImpactoClassificacaoModel> ImpactosClassificacao { get; set; }
         public DbSet<LocalModel> Locais { get; set; }
+        public DbSet<ImpactoModel> Impactos { get; set; }
         public DbSet<SensoresModel> Sensores { get; set; }
-        public DbSet<SubGrupoDesastreModel> SubGruposDesastre { get; set; }
+        public DbSet<SubGrupoDesastreModel> SubGrupoDesastre { get; set; }
         public DbSet<TerrenoGeograficoModel> TerrenosGeograficos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,11 +31,36 @@ namespace TheGuardiansEyesData
             new ImpactoClassificacaoModel { Id = 3, Nivel = 3, DescNivel = "Grave" }
         );
 
-            modelBuilder.Entity<ImagensCapturadasModel>()
-            .HasOne(i => i.Drone)
-            .WithMany(d => d.ImagensCapturadas)
-            .HasForeignKey(i => i.IdDrone)
-            .OnDelete(DeleteBehavior.Cascade);
+         modelBuilder.Entity<TerrenoGeograficoModel>().HasData(
+            new TerrenoGeograficoModel { Id = 1, NomeTerreno = "Montanha" },
+            new TerrenoGeograficoModel { Id = 2, NomeTerreno = "Planície" },
+            new TerrenoGeograficoModel { Id = 3, NomeTerreno = "Floresta" },
+            new TerrenoGeograficoModel { Id = 4, NomeTerreno = "Área Urbana" },
+            new TerrenoGeograficoModel { Id = 5, NomeTerreno = "Deserto" },
+            new TerrenoGeograficoModel { Id = 6, NomeTerreno = "Pantanal" },
+            new TerrenoGeograficoModel { Id = 7, NomeTerreno = "Litoral" }
+        );
+
+
+            modelBuilder.Entity<ImpactoModel>()
+        .HasOne(i => i.ImpactoClassificacao)
+        .WithMany() // Sem coleção inversa por enquanto
+        .HasForeignKey(i => i.ImpactoClassificacaoId);
+
+modelBuilder.Entity<ImagensCapturadasModel>()
+    .HasOne(i => i.Local)
+    .WithMany(l => l.ImagensCapturadas) // você pode criar essa propriedade no LocalModel
+    .HasForeignKey(i => i.IdLocal);
+
+modelBuilder.Entity<ImagensCapturadasModel>()
+    .HasOne(i => i.ImpactoClassificacao)
+    .WithMany()
+    .HasForeignKey(i => i.IdImpactoClassificacao);
+
+modelBuilder.Entity<ImagensCapturadasModel>()
+    .HasOne(i => i.Drone)
+    .WithMany()
+    .HasForeignKey(i => i.IdDrone);
 
                 modelBuilder.Entity<DesastreModel>()
         .HasOne(d => d.Local)
@@ -45,7 +71,7 @@ namespace TheGuardiansEyesData
             modelBuilder.Entity<DesastreModel>()
                 .HasOne(d => d.ImpactoClassificacao)
                 .WithMany(ic => ic.Desastres)
-                .HasForeignKey(d => d.IdImpactoClassificacao)
+                .HasForeignKey(d => d.Impacto)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<DesastreModel>()

@@ -1,5 +1,6 @@
 namespace TheGuardiansEyesModel;
 
+
 public class SubGrupoDesastreModel
 {
 
@@ -10,8 +11,8 @@ public class SubGrupoDesastreModel
 
     // Chave estrangeira
     public required int GrupoDesastreId { get; set; }
-    
-     // Propriedade de navegação
+
+    // Propriedade de navegação
     public GrupoDesastreModel? GrupoDesastre { get; set; }
     
 }

@@ -9,8 +9,8 @@ public class DesastreModel
     public LocalModel? Local { get; set; }
 
     // FK e navegação para ImpactoClassificacao
-    public required int IdImpactoClassificacao { get; set; }
-    public ImpactoClassificacaoModel? ImpactoClassificacao { get; set; }
+    public required int Impacto{ get; set; }
+    public ImpactoModel? ImpactoClassificacao { get; set; }
 
     // FK e navegação para GrupoDesastre
     public required int IdGrupoDesastre { get; set; }

@@ -39,24 +39,29 @@ namespace TheGuardiansEyesData.Migrations
                     b.Property<int>("IdGrupoDesastre")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int>("IdImpactoClassificacao")
-                        .HasColumnType("NUMBER(10)");
-
                     b.Property<int>("IdLocal")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("IdUsuario")
                         .HasColumnType("NUMBER(10)");
 
+                    b.Property<int>("Impacto")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int?>("TerrenoGeograficoModelId")
+                        .HasColumnType("NUMBER(10)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IdGrupoDesastre");
 
-                    b.HasIndex("IdImpactoClassificacao");
-
                     b.HasIndex("IdLocal");
 
                     b.HasIndex("IdUsuario");
+
+                    b.HasIndex("Impacto");
+
+                    b.HasIndex("TerrenoGeograficoModelId");
 
                     b.ToTable("Desastres");
                 });
@@ -124,11 +129,20 @@ namespace TheGuardiansEyesData.Migrations
 
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("DroneModelId")
+                        .HasColumnType("NUMBER(10)");
+
                     b.Property<string>("Hospedagem")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<int>("IdDrone")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int>("IdImpactoClassificacao")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int>("IdLocal")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("Tamanho")
@@ -137,7 +151,13 @@ namespace TheGuardiansEyesData.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DroneModelId");
+
                     b.HasIndex("IdDrone");
+
+                    b.HasIndex("IdImpactoClassificacao");
+
+                    b.HasIndex("IdLocal");
 
                     b.ToTable("ImagensCapturadas");
                 });
@@ -182,6 +202,24 @@ namespace TheGuardiansEyesData.Migrations
                         });
                 });
 
+            modelBuilder.Entity("TheGuardiansEyesModel.ImpactoModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ImpactoClassificacaoId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ImpactoClassificacaoId");
+
+                    b.ToTable("Impactos");
+                });
+
             modelBuilder.Entity("TheGuardiansEyesModel.LocalModel", b =>
                 {
                     b.Property<int>("Id")
@@ -191,19 +229,21 @@ namespace TheGuardiansEyesData.Migrations
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Cep")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<string>("Endereco")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
+                    b.Property<double>("Latitude")
+                        .HasColumnType("BINARY_DOUBLE");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("BINARY_DOUBLE");
+
                     b.Property<string>("Municipio")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<string>("Numero")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.HasKey("Id");
@@ -286,7 +326,7 @@ namespace TheGuardiansEyesData.Migrations
 
                     b.HasIndex("GrupoDesastreId");
 
-                    b.ToTable("SubGruposDesastre");
+                    b.ToTable("SubGrupoDesastre");
                 });
 
             modelBuilder.Entity("TheGuardiansEyesModel.TerrenoGeograficoModel", b =>
@@ -304,6 +344,43 @@ namespace TheGuardiansEyesData.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TerrenosGeograficos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            NomeTerreno = "Montanha"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            NomeTerreno = "Planície"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            NomeTerreno = "Floresta"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            NomeTerreno = "Área Urbana"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            NomeTerreno = "Deserto"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            NomeTerreno = "Pantanal"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            NomeTerreno = "Litoral"
+                        });
                 });
 
             modelBuilder.Entity("TheGuardiansEyesModel.UsuarioModel", b =>
@@ -355,12 +432,6 @@ namespace TheGuardiansEyesData.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("TheGuardiansEyesModel.ImpactoClassificacaoModel", "ImpactoClassificacao")
-                        .WithMany("Desastres")
-                        .HasForeignKey("IdImpactoClassificacao")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("TheGuardiansEyesModel.LocalModel", "Local")
                         .WithMany("Desastres")
                         .HasForeignKey("IdLocal")
@@ -373,6 +444,16 @@ namespace TheGuardiansEyesData.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("TheGuardiansEyesModel.ImpactoModel", "ImpactoClassificacao")
+                        .WithMany("Desastres")
+                        .HasForeignKey("Impacto")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("TheGuardiansEyesModel.TerrenoGeograficoModel", null)
+                        .WithMany("Desastres")
+                        .HasForeignKey("TerrenoGeograficoModelId");
+
                     b.Navigation("GrupoDesastre");
 
                     b.Navigation("ImpactoClassificacao");
@@ -384,13 +465,44 @@ namespace TheGuardiansEyesData.Migrations
 
             modelBuilder.Entity("TheGuardiansEyesModel.ImagensCapturadasModel", b =>
                 {
-                    b.HasOne("TheGuardiansEyesModel.DroneModel", "Drone")
+                    b.HasOne("TheGuardiansEyesModel.DroneModel", null)
                         .WithMany("ImagensCapturadas")
+                        .HasForeignKey("DroneModelId");
+
+                    b.HasOne("TheGuardiansEyesModel.DroneModel", "Drone")
+                        .WithMany()
                         .HasForeignKey("IdDrone")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TheGuardiansEyesModel.ImpactoModel", "ImpactoClassificacao")
+                        .WithMany()
+                        .HasForeignKey("IdImpactoClassificacao")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TheGuardiansEyesModel.LocalModel", "Local")
+                        .WithMany("ImagensCapturadas")
+                        .HasForeignKey("IdLocal")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Drone");
+
+                    b.Navigation("ImpactoClassificacao");
+
+                    b.Navigation("Local");
+                });
+
+            modelBuilder.Entity("TheGuardiansEyesModel.ImpactoModel", b =>
+                {
+                    b.HasOne("TheGuardiansEyesModel.ImpactoClassificacaoModel", "ImpactoClassificacao")
+                        .WithMany()
+                        .HasForeignKey("ImpactoClassificacaoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ImpactoClassificacao");
                 });
 
             modelBuilder.Entity("TheGuardiansEyesModel.SubGrupoDesastreModel", b =>
@@ -416,12 +528,19 @@ namespace TheGuardiansEyesData.Migrations
                     b.Navigation("Subgrupos");
                 });
 
-            modelBuilder.Entity("TheGuardiansEyesModel.ImpactoClassificacaoModel", b =>
+            modelBuilder.Entity("TheGuardiansEyesModel.ImpactoModel", b =>
                 {
                     b.Navigation("Desastres");
                 });
 
             modelBuilder.Entity("TheGuardiansEyesModel.LocalModel", b =>
+                {
+                    b.Navigation("Desastres");
+
+                    b.Navigation("ImagensCapturadas");
+                });
+
+            modelBuilder.Entity("TheGuardiansEyesModel.TerrenoGeograficoModel", b =>
                 {
                     b.Navigation("Desastres");
                 });

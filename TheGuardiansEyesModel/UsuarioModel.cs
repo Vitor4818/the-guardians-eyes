@@ -1,4 +1,6 @@
 ﻿namespace TheGuardiansEyesModel;
+using System.Text.Json.Serialization;
+
 
 public class UsuarioModel
 {
@@ -12,7 +14,8 @@ public class UsuarioModel
     public required string Email { get; set; }
     public required string Senha { get; set; }
 
-        // Desastres criados/relacionados ao usuário
+    // Desastres criados/relacionados ao usuário
+    [JsonIgnore]
     public ICollection<DesastreModel>? Desastres { get; set; }
-    
+
 }

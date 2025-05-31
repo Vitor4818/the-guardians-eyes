@@ -1,15 +1,24 @@
 namespace TheGuardiansEyesModel;
+using System.Text.Json.Serialization;
 
 public class LocalModel
 {
+    public int Id { get; set; }
 
-    public required int Id { get; set; }
-    public required string Cep { get; set; }
-    public required string Endereco { get; set; }
-    public required string Municipio { get; set; }
-    public required string Numero { get; set; }
+    // Coordenadas geográficas obrigatórias
+    public required double Latitude { get; set; }
+    public required double Longitude { get; set; }
 
-        // Desastres relacionados ao Local
+    // Dados de endereço opcionais
+    public string? Cep { get; set; }
+    public string? Endereco { get; set; }
+    public string? Municipio { get; set; }
+    public string? Numero { get; set; }
+
+    // Relação reversa
+    [JsonIgnore]
     public ICollection<DesastreModel>? Desastres { get; set; }
+        [JsonIgnore]
+        public ICollection<ImagensCapturadasModel> ImagensCapturadas { get; set; } = new List<ImagensCapturadasModel>();
 
 }

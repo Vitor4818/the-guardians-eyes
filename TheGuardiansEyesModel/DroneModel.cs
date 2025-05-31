@@ -1,4 +1,6 @@
 namespace TheGuardiansEyesModel;
+using System.Text.Json.Serialization;
+
 
 public class DroneModel
 {
@@ -13,6 +15,7 @@ public class DroneModel
     public required int Peso { get; set; }
 
     // Navegação para Imagens
+    [JsonIgnore]
     public ICollection<ImagensCapturadasModel>? ImagensCapturadas { get; set; }
-    
+
 }
