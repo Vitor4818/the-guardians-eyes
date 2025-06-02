@@ -25,61 +25,77 @@ public class ImagensCapturadasService
 
     public async Task<ImagensCapturadasModel> CadastrarImagemAsync(ImagensCapturadasModel imagem)
     {
-        var resposta = await _httpClient.PostAsJsonAsync(_apiPythonUrl, new { urlImagem = imagem.Hospedagem });
-
-        if (resposta.IsSuccessStatusCode)
+        try
         {
-            var classificacao = await resposta.Content.ReadFromJsonAsync<ClassificacaoResponse>();
+            var resposta = await _httpClient.PostAsJsonAsync(_apiPythonUrl, new { urlImagem = imagem.Hospedagem });
 
-            if (classificacao != null)
+            if (resposta.IsSuccessStatusCode)
             {
-                imagem.IdImpactoClassificacao = classificacao.Classe.ToLower() switch
+                var classificacao = await resposta.Content.ReadFromJsonAsync<ClassificacaoResponse>();
+
+                if (classificacao != null)
                 {
-                    "leve" => 1,
-                    "moderado" => 2,
-                    "pesado" => 3,
-                    _ => 1
-                };
+                    imagem.IdImpactoClassificacao = classificacao.Classe.ToLower() switch
+                    {
+                        "leve" => 1,
+                        "moderado" => 2,
+                        "pesado" => 3,
+                        _ => 1
+                    };
+                }
+                else
+                {
+                    imagem.IdImpactoClassificacao = 1;
+                }
             }
             else
             {
                 imagem.IdImpactoClassificacao = 1;
             }
-        }
-        else
-        {
-            imagem.IdImpactoClassificacao = 1;
-        }
 
-        _context.ImagensCapturadas.Add(imagem);
-        await _context.SaveChangesAsync();
-        return imagem;
+            _context.ImagensCapturadas.Add(imagem);
+            await _context.SaveChangesAsync();
+            return imagem;
+        }
+        catch (DbUpdateException ex)
+        {
+            throw new InvalidOperationException("Erro ao cadastrar imagem. Verifique os dados fornecidos.", ex);
+        }
+        catch (HttpRequestException ex)
+        {
+            throw new InvalidOperationException("Erro ao comunicar com a API de classificação de imagem.", ex);
+        }
     }
 
-    // Os outros métodos podem continuar síncronos se quiser:
     public List<ImagensCapturadasModel> ListarImagens()
     {
         return _context.ImagensCapturadas
             .Include(i => i.Local)
             .Include(i => i.ImpactoClassificacao)
             .Include(i => i.Drone)
-            .Include(i => i.Desastre) 
+            .Include(i => i.Desastre)
             .ToList();
     }
 
-    public ImagensCapturadasModel? ObterPorId(int id)
+    public ImagensCapturadasModel ObterPorId(int id)
     {
-        return _context.ImagensCapturadas
+        var imagem = _context.ImagensCapturadas
             .Include(i => i.Local)
             .Include(i => i.ImpactoClassificacao)
             .Include(i => i.Drone)
             .FirstOrDefault(i => i.Id == id);
+
+        if (imagem == null)
+            throw new KeyNotFoundException("Imagem não encontrada.");
+
+        return imagem;
     }
 
-    public bool AtualizarImagem(ImagensCapturadasModel imagem)
+    public ImagensCapturadasModel AtualizarImagem(ImagensCapturadasModel imagem)
     {
         var existente = _context.ImagensCapturadas.Find(imagem.Id);
-        if (existente == null) return false;
+        if (existente == null)
+            throw new KeyNotFoundException("Imagem para atualização não encontrada.");
 
         existente.Hospedagem = imagem.Hospedagem;
         existente.Tamanho = imagem.Tamanho;
@@ -87,18 +103,32 @@ public class ImagensCapturadasService
         existente.IdImpactoClassificacao = imagem.IdImpactoClassificacao;
         existente.IdDrone = imagem.IdDrone;
 
-        _context.ImagensCapturadas.Update(existente);
-        _context.SaveChanges();
-        return true;
+        try
+        {
+            _context.ImagensCapturadas.Update(existente);
+            _context.SaveChanges();
+            return existente;
+        }
+        catch (DbUpdateException ex)
+        {
+            throw new InvalidOperationException("Erro ao atualizar imagem. Verifique os dados fornecidos.", ex);
+        }
     }
 
-    public bool RemoverImagem(int id)
+    public void RemoverImagem(int id)
     {
         var imagem = _context.ImagensCapturadas.Find(id);
-        if (imagem == null) return false;
+        if (imagem == null)
+            throw new KeyNotFoundException("Imagem para exclusão não encontrada.");
 
-        _context.ImagensCapturadas.Remove(imagem);
-        _context.SaveChanges();
-        return true;
+        try
+        {
+            _context.ImagensCapturadas.Remove(imagem);
+            _context.SaveChanges();
+        }
+        catch (DbUpdateException ex)
+        {
+            throw new InvalidOperationException("Erro ao remover imagem. Verifique se há vínculos com outros dados.", ex);
+        }
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using TheGuardiansEyesModel;
+using Microsoft.Extensions.Logging;
 using TheGuardiansEyesBusiness;
+using TheGuardiansEyesModel;
 
 namespace TheGuardiansEyesApi.Controllers
 {
@@ -9,80 +10,131 @@ namespace TheGuardiansEyesApi.Controllers
     public class LocalController : ControllerBase
     {
         private readonly LocalService _localService;
+        private readonly ILogger<LocalController> _logger;
 
-        public LocalController(LocalService localService)
+        public LocalController(LocalService localService, ILogger<LocalController> logger)
         {
             _localService = localService;
+            _logger = logger;
         }
 
-        // GET: api/local
         [HttpGet]
         public IActionResult Get()
         {
             var locais = _localService.ListarLocais();
-            if (locais == null || locais.Count == 0)
-                return NoContent();
-
-            return Ok(locais);
+            return locais.Count == 0 ? NoContent() : Ok(locais);
         }
 
-        // GET: api/local/{id}
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var local = _localService.ObterPorId(id);
-            if (local == null)
-                return NotFound();
-
-            return Ok(local);
+            try
+            {
+                var local = _localService.ObterPorId(id);
+                return Ok(local);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao buscar local por ID.");
+                return StatusCode(500, "Erro interno ao buscar local.");
+            }
         }
 
-        // GET: api/local/coordenadas?latitude=...&longitude=...
         [HttpGet("coordenadas")]
         public IActionResult GetPorCoordenadas([FromQuery] double latitude, [FromQuery] double longitude)
         {
-            var local = _localService.ObterPorCoordenadas(latitude, longitude);
-            if (local == null)
-                return NotFound();
-
-            return Ok(local);
+            try
+            {
+                var local = _localService.ObterPorCoordenadas(latitude, longitude);
+                return Ok(local);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao buscar local por coordenadas.");
+                return StatusCode(500, "Erro interno ao buscar local.");
+            }
         }
 
-        // POST: api/local
         [HttpPost]
         public IActionResult Post([FromBody] LocalModel local)
         {
-            // Validações mínimas
             if (local == null || local.Latitude == 0 || local.Longitude == 0)
                 return BadRequest("Latitude e Longitude devem ser fornecidas e válidas.");
 
-            var criado = _localService.CadastrarLocal(local);
-            return CreatedAtAction(nameof(Get), new { id = criado.Id }, criado);
+            try
+            {
+                var criado = _localService.CadastrarLocal(local);
+                return CreatedAtAction(nameof(Get), new { id = criado.Id }, criado);
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro inesperado ao cadastrar local.");
+                return StatusCode(500, "Erro inesperado. Tente novamente mais tarde.");
+            }
         }
 
-        // PUT: api/local/{id}
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] LocalModel local)
         {
             if (local == null || local.Id != id)
                 return BadRequest("Dados inconsistentes.");
 
-            var atualizado = _localService.AtualizarLocal(local);
-            if (!atualizado)
-                return NotFound();
-
-            return NoContent();
+            try
+            {
+                var atualizado = _localService.AtualizarLocal(local);
+                return Ok(atualizado);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro inesperado ao atualizar local.");
+                return StatusCode(500, "Erro inesperado. Tente novamente mais tarde.");
+            }
         }
 
-        // DELETE: api/local/{id}
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var removido = _localService.RemoverLocal(id);
-            if (!removido)
-                return NotFound();
-
-            return NoContent();
+            try
+            {
+                _localService.RemoverLocal(id);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro inesperado ao excluir local.");
+                return StatusCode(500, "Erro inesperado. Tente novamente mais tarde.");
+            }
         }
     }
 }

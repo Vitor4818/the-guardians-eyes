@@ -19,16 +19,34 @@ namespace TheGuardiansEyesApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var drones = _droneService.ListarDrones();
-            return drones.Count == 0 ? NoContent() : Ok(drones);
+            try
+            {
+                var drones = _droneService.ListarDrones();
+                return drones.Count == 0 ? NoContent() : Ok(drones);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno ao listar drones: {ex.Message}");
+            }
         }
 
         // GET: api/drone/{id}
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var drone = _droneService.ObterPorId(id);
-            return drone == null ? NotFound() : Ok(drone);
+            try
+            {
+                var drone = _droneService.ObterPorId(id);
+                return Ok(drone);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno ao obter drone: {ex.Message}");
+            }
         }
 
         // POST: api/drone
@@ -47,8 +65,19 @@ namespace TheGuardiansEyesApi.Controllers
                 return BadRequest("Todos os campos obrigatórios devem ser preenchidos.");
             }
 
-            var criado = _droneService.CadastrarDrone(drone);
-            return CreatedAtAction(nameof(Get), new { id = criado.Id }, criado);
+            try
+            {
+                var criado = _droneService.CadastrarDrone(drone);
+                return CreatedAtAction(nameof(Get), new { id = criado.Id }, criado);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno ao cadastrar drone: {ex.Message}");
+            }
         }
 
         // PUT: api/drone/{id}
@@ -58,14 +87,46 @@ namespace TheGuardiansEyesApi.Controllers
             if (drone == null || drone.Id != id)
                 return BadRequest("Dados inconsistentes.");
 
-            return _droneService.AtualizarDrone(drone) ? NoContent() : NotFound();
+            try
+            {
+                _droneService.AtualizarDrone(drone);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno ao atualizar drone: {ex.Message}");
+            }
         }
 
         // DELETE: api/drone/{id}
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            return _droneService.RemoverDrone(id) ? NoContent() : NotFound();
+            try
+            {
+                _droneService.RemoverDrone(id);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno ao remover drone: {ex.Message}");
+            }
         }
     }
 }

@@ -17,16 +17,21 @@ namespace TheGuardiansEyesBusiness
         public List<TerrenoGeograficoModel> ListarTerrenos()
         {
             return _context.TerrenosGeograficos
-                .Include(t => t.Desastres) // Inclui os desastres relacionados (se houver)
+                .Include(t => t.Desastres) 
                 .ToList();
         }
 
         // OBTER POR ID
-        public TerrenoGeograficoModel? ObterPorId(int id)
+        public TerrenoGeograficoModel ObterPorId(int id)
         {
-            return _context.TerrenosGeograficos
+            var terreno = _context.TerrenosGeograficos
                 .Include(t => t.Desastres)
                 .FirstOrDefault(t => t.Id == id);
+
+            if (terreno == null)
+                throw new KeyNotFoundException("Terreno geográfico não encontrado.");
+
+            return terreno;
         }
 
     }

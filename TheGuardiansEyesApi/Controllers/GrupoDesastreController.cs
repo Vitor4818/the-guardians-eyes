@@ -8,18 +8,18 @@ namespace TheGuardiansEyesApi.Controllers
     [Route("api/[controller]")]
     public class GrupoDesastreController : ControllerBase
     {
-        private readonly GrupoDesastreService grupoService;
+        private readonly GrupoDesastreService _grupoService;
 
         public GrupoDesastreController(GrupoDesastreService grupoService)
         {
-            this.grupoService = grupoService;
+            _grupoService = grupoService;
         }
 
         // GET: api/grupodesastre
         [HttpGet]
         public IActionResult Get()
         {
-            var grupos = grupoService.ListarGrupos();
+            var grupos = _grupoService.ListarGrupos();
             return grupos.Count == 0 ? NoContent() : Ok(grupos);
         }
 
@@ -27,8 +27,15 @@ namespace TheGuardiansEyesApi.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var grupo = grupoService.ObterPorId(id);
-            return grupo == null ? NotFound() : Ok(grupo);
+            try
+            {
+                var grupo = _grupoService.ObterPorId(id);
+                return Ok(grupo);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // POST: api/grupodesastre
@@ -38,8 +45,15 @@ namespace TheGuardiansEyesApi.Controllers
             if (string.IsNullOrWhiteSpace(grupo.NomeGrupo))
                 return BadRequest("O nome do grupo é obrigatório.");
 
-            var criado = grupoService.CadastrarGrupo(grupo);
-            return CreatedAtAction(nameof(Get), new { id = criado.Id }, criado);
+            try
+            {
+                var criado = _grupoService.CadastrarGrupo(grupo);
+                return CreatedAtAction(nameof(Get), new { id = criado.Id }, criado);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/grupodesastre/{id}
@@ -49,14 +63,38 @@ namespace TheGuardiansEyesApi.Controllers
             if (grupo == null || grupo.Id != id)
                 return BadRequest("Dados inconsistentes.");
 
-            return grupoService.AtualizarGrupo(grupo) ? NoContent() : NotFound();
+            try
+            {
+                var atualizado = _grupoService.AtualizarGrupo(grupo);
+                return atualizado ? NoContent() : NotFound();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE: api/grupodesastre/{id}
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            return grupoService.RemoverGrupo(id) ? NoContent() : NotFound();
+            try
+            {
+                var removido = _grupoService.RemoverGrupo(id);
+                return removido ? NoContent() : NotFound();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

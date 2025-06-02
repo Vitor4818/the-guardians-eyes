@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using TheGuardiansEyesModel;
+using Microsoft.Extensions.Logging;
 using TheGuardiansEyesBusiness;
+using TheGuardiansEyesModel;
 
 namespace TheGuardiansEyesApi.Controllers
 {
@@ -9,13 +10,14 @@ namespace TheGuardiansEyesApi.Controllers
     public class SensoresController : ControllerBase
     {
         private readonly SensoresService _sensoresService;
+        private readonly ILogger<SensoresController> _logger;
 
-        public SensoresController(SensoresService sensoresService)
+        public SensoresController(SensoresService sensoresService, ILogger<SensoresController> logger)
         {
             _sensoresService = sensoresService;
+            _logger = logger;
         }
 
-        // GET: api/sensores
         [HttpGet]
         public IActionResult Get()
         {
@@ -23,15 +25,25 @@ namespace TheGuardiansEyesApi.Controllers
             return sensores.Count == 0 ? NoContent() : Ok(sensores);
         }
 
-        // GET: api/sensores/{id}
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var sensor = _sensoresService.ObterPorId(id);
-            return sensor == null ? NotFound() : Ok(sensor);
+            try
+            {
+                var sensor = _sensoresService.ObterPorId(id);
+                return Ok(sensor);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao buscar sensor por ID.");
+                return StatusCode(500, "Erro interno ao buscar sensor.");
+            }
         }
 
-        // POST: api/sensores
         [HttpPost]
         public IActionResult Post([FromBody] SensoresModel sensor)
         {
@@ -49,25 +61,72 @@ namespace TheGuardiansEyesApi.Controllers
                 return BadRequest("Todos os campos obrigatórios devem ser preenchidos.");
             }
 
-            var criado = _sensoresService.CadastrarSensor(sensor);
-            return CreatedAtAction(nameof(Get), new { id = criado.Id }, criado);
+            try
+            {
+                var criado = _sensoresService.CadastrarSensor(sensor);
+                return CreatedAtAction(nameof(Get), new { id = criado.Id }, criado);
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro inesperado ao cadastrar sensor.");
+                return StatusCode(500, "Erro inesperado. Tente novamente mais tarde.");
+            }
         }
 
-        // PUT: api/sensores/{id}
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] SensoresModel sensor)
         {
             if (sensor == null || sensor.Id != id)
                 return BadRequest("Dados inconsistentes.");
 
-            return _sensoresService.AtualizarSensor(sensor) ? NoContent() : NotFound();
+            try
+            {
+                var atualizado = _sensoresService.AtualizarSensor(sensor);
+                return Ok(atualizado);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro inesperado ao atualizar sensor.");
+                return StatusCode(500, "Erro inesperado. Tente novamente mais tarde.");
+            }
         }
 
-        // DELETE: api/sensores/{id}
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            return _sensoresService.RemoverSensor(id) ? NoContent() : NotFound();
+            try
+            {
+                _sensoresService.RemoverSensor(id);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro inesperado ao excluir sensor.");
+                return StatusCode(500, "Erro inesperado. Tente novamente mais tarde.");
+            }
         }
     }
 }

@@ -16,16 +16,33 @@ namespace TheGuardiansEyesBusiness
         // LISTAR TODOS
         public List<ImpactoClassificacaoModel> ListarClassificacoes()
         {
-            return _context.ImpactosClassificacao
-                .ToList();
+            try
+            {
+                return _context.ImpactosClassificacao.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao listar classificações de impacto.", ex);
+            }
         }
 
         // OBTER POR ID
-        public ImpactoClassificacaoModel? ObterPorId(int id)
+        public ImpactoClassificacaoModel ObterPorId(int id)
         {
-            return _context.ImpactosClassificacao
-                .FirstOrDefault(i => i.Id == id);
-        }
+            try
+            {
+                var classificacao = _context.ImpactosClassificacao
+                    .FirstOrDefault(i => i.Id == id);
 
+                if (classificacao == null)
+                    throw new KeyNotFoundException("Classificação de impacto não encontrada.");
+
+                return classificacao;
+            }
+            catch (Exception ex) when (!(ex is KeyNotFoundException))
+            {
+                throw new InvalidOperationException("Erro ao buscar a classificação de impacto.", ex);
+            }
+        }
     }
 }

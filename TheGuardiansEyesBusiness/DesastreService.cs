@@ -1,9 +1,9 @@
-    using TheGuardiansEyesModel;
-    using TheGuardiansEyesData;
-    using Microsoft.EntityFrameworkCore;
+using TheGuardiansEyesModel;
+using TheGuardiansEyesData;
+using Microsoft.EntityFrameworkCore;
 
-    namespace TheGuardiansEyesBusiness
-    {
+namespace TheGuardiansEyesBusiness
+{
     public class DesastreService
     {
         private readonly AppDbContext _context;
@@ -19,36 +19,49 @@
             return _context.Desastres
                 .Include(d => d.Local)
                 .Include(d => d.ImpactoClassificacao)
-                        .ThenInclude(i => i.ImpactoClassificacao) // Agora sim pega o ImpactoClassificacaoModel
+                    .ThenInclude(i => i.ImpactoClassificacao)
                 .Include(d => d.GrupoDesastre)
                 .Include(d => d.Usuario)
                 .ToList();
         }
 
         // OBTER POR ID
-        public DesastreModel? ObterPorId(int id)
+        public DesastreModel ObterPorId(int id)
         {
-            return _context.Desastres
+            var desastre = _context.Desastres
                 .Include(d => d.Local)
-                .Include(i => i.ImpactoClassificacao)
+                .Include(d => d.ImpactoClassificacao)
                 .Include(d => d.GrupoDesastre)
                 .Include(d => d.Usuario)
                 .FirstOrDefault(d => d.Id == id);
+
+            if (desastre == null)
+                throw new KeyNotFoundException("Desastre não encontrado.");
+
+            return desastre;
         }
 
         // CADASTRAR
         public DesastreModel CadastrarDesastre(DesastreModel desastre)
         {
-            _context.Desastres.Add(desastre);
-            _context.SaveChanges();
-            return desastre;
+            try
+            {
+                _context.Desastres.Add(desastre);
+                _context.SaveChanges();
+                return desastre;
+            }
+            catch (DbUpdateException)
+            {
+                throw new InvalidOperationException("Erro ao cadastrar o desastre. Verifique se os dados estão corretos.");
+            }
         }
 
         // ATUALIZAR
         public bool AtualizarDesastre(DesastreModel desastre)
         {
             var existente = _context.Desastres.Find(desastre.Id);
-            if (existente == null) return false;
+            if (existente == null)
+                throw new KeyNotFoundException("Desastre não encontrado para atualização.");
 
             existente.IdLocal = desastre.IdLocal;
             existente.Impacto = desastre.Impacto;
@@ -57,22 +70,38 @@
             existente.Cobrade = desastre.Cobrade;
             existente.DataOcorrencia = desastre.DataOcorrencia;
 
-            _context.Desastres.Update(existente);
-            _context.SaveChanges();
-            return true;
+            try
+            {
+                _context.Desastres.Update(existente);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException)
+            {
+                throw new InvalidOperationException("Erro ao atualizar o desastre.");
+            }
         }
 
         // REMOVER
         public bool RemoverDesastre(int id)
         {
             var desastre = _context.Desastres.Find(id);
-            if (desastre == null) return false;
+            if (desastre == null)
+                throw new KeyNotFoundException("Desastre não encontrado para remoção.");
 
-            _context.Desastres.Remove(desastre);
-            _context.SaveChanges();
-            return true;
+            try
+            {
+                _context.Desastres.Remove(desastre);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException)
+            {
+                throw new InvalidOperationException("Erro ao remover o desastre. Verifique se há dependências relacionadas.");
+            }
         }
 
+        // OBTER MAIS PRÓXIMO
         public DesastreModel? ObterDesastreMaisProximo(double latitude, double longitude, double raioKm = 0.5)
         {
             var desastres = _context.Desastres
@@ -90,16 +119,14 @@
                     );
 
                     if (distancia <= raioKm)
-                    {
                         return desastre;
-                    }
                 }
             }
 
             return null;
         }
 
-                private double CalcularDistanciaEmKm(double lat1, double lon1, double lat2, double lon2)
+        private double CalcularDistanciaEmKm(double lat1, double lon1, double lat2, double lon2)
         {
             const double raioTerraKm = 6371;
 
@@ -107,8 +134,8 @@
             double dLon = GrausParaRadianos(lon2 - lon1);
 
             double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
-                    Math.Cos(GrausParaRadianos(lat1)) * Math.Cos(GrausParaRadianos(lat2)) *
-                    Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+                       Math.Cos(GrausParaRadianos(lat1)) * Math.Cos(GrausParaRadianos(lat2)) *
+                       Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
 
             double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
 
@@ -119,6 +146,5 @@
         {
             return graus * (Math.PI / 180);
         }
-
     }
-    }
+}

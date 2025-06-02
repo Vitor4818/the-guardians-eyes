@@ -22,19 +22,31 @@ namespace TheGuardiansEyesBusiness
         }
 
         // OBTER POR ID
-        public DroneModel? ObterPorId(int id)
+        public DroneModel ObterPorId(int id)
         {
-            return _context.Drones
+            var drone = _context.Drones
                 .Include(d => d.ImagensCapturadas)
                 .FirstOrDefault(d => d.Id == id);
+
+            if (drone == null)
+                throw new KeyNotFoundException("Drone não encontrado.");
+
+            return drone;
         }
 
         // CADASTRAR
         public DroneModel CadastrarDrone(DroneModel drone)
         {
-            _context.Drones.Add(drone);
-            _context.SaveChanges();
-            return drone;
+            try
+            {
+                _context.Drones.Add(drone);
+                _context.SaveChanges();
+                return drone;
+            }
+            catch (DbUpdateException)
+            {
+                throw new InvalidOperationException("Erro ao cadastrar o drone. Verifique se os dados estão corretos.");
+            }
         }
 
         // ATUALIZAR
@@ -44,7 +56,8 @@ namespace TheGuardiansEyesBusiness
                 .Include(d => d.ImagensCapturadas)
                 .FirstOrDefault(d => d.Id == drone.Id);
 
-            if (existente == null) return false;
+            if (existente == null)
+                throw new KeyNotFoundException("Drone não encontrado para atualização.");
 
             existente.Fabricante = drone.Fabricante;
             existente.Modelo = drone.Modelo;
@@ -54,20 +67,36 @@ namespace TheGuardiansEyesBusiness
             existente.Camera = drone.Camera;
             existente.Peso = drone.Peso;
 
-            _context.Drones.Update(existente);
-            _context.SaveChanges();
-            return true;
+            try
+            {
+                _context.Drones.Update(existente);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException)
+            {
+                throw new InvalidOperationException("Erro ao atualizar o drone.");
+            }
         }
 
         // REMOVER
         public bool RemoverDrone(int id)
         {
             var drone = _context.Drones.Find(id);
-            if (drone == null) return false;
 
-            _context.Drones.Remove(drone);
-            _context.SaveChanges();
-            return true;
+            if (drone == null)
+                throw new KeyNotFoundException("Drone não encontrado para remoção.");
+
+            try
+            {
+                _context.Drones.Remove(drone);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException)
+            {
+                throw new InvalidOperationException("Erro ao remover o drone. Verifique se há dependências relacionadas.");
+            }
         }
     }
 }

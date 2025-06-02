@@ -22,43 +22,65 @@ namespace TheGuardiansEyesBusiness
         }
 
         // OBTER POR ID
-        public ImpactoModel? ObterPorId(int id)
-        {
-            return _context.Impactos
-                .Include(i => i.ImpactoClassificacao)
-                .FirstOrDefault(i => i.Id == id);
-        }
+ public ImpactoModel? ObterPorId(int id)
+{
+    return _context.Impactos
+        .Include(i => i.ImpactoClassificacao)
+        .FirstOrDefault(i => i.Id == id);
+}
 
         // CADASTRAR
         public ImpactoModel CadastrarImpacto(ImpactoModel impacto)
         {
-            _context.Impactos.Add(impacto);
-            _context.SaveChanges();
-            return impacto;
+            try
+            {
+                _context.Impactos.Add(impacto);
+                _context.SaveChanges();
+                return impacto;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Erro ao cadastrar impacto. Verifique se os dados estão corretos e se há restrições de integridade.", ex);
+            }
         }
 
         // ATUALIZAR
-        public bool AtualizarImpacto(ImpactoModel impacto)
+        public ImpactoModel AtualizarImpacto(ImpactoModel impacto)
         {
             var existente = _context.Impactos.Find(impacto.Id);
-            if (existente == null) return false;
+            if (existente == null)
+                throw new KeyNotFoundException("Impacto para atualização não encontrado.");
 
             existente.ImpactoClassificacaoId = impacto.ImpactoClassificacaoId;
 
-            _context.Impactos.Update(existente);
-            _context.SaveChanges();
-            return true;
+            try
+            {
+                _context.Impactos.Update(existente);
+                _context.SaveChanges();
+                return existente;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Erro ao atualizar o impacto. Verifique os dados fornecidos.", ex);
+            }
         }
 
         // REMOVER
-        public bool RemoverImpacto(int id)
+        public void RemoverImpacto(int id)
         {
             var impacto = _context.Impactos.Find(id);
-            if (impacto == null) return false;
+            if (impacto == null)
+                throw new KeyNotFoundException("Impacto para exclusão não encontrado.");
 
-            _context.Impactos.Remove(impacto);
-            _context.SaveChanges();
-            return true;
+            try
+            {
+                _context.Impactos.Remove(impacto);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Erro ao excluir o impacto. Verifique se ele está vinculado a outros dados.", ex);
+            }
         }
     }
 }

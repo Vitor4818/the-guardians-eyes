@@ -41,16 +41,18 @@ namespace TheGuardiansEyesData
                new TerrenoGeograficoModel { Id = 7, NomeTerreno = "Litoral" }
            );
 
-
-            modelBuilder.Entity<ImpactoModel>()
-        .HasOne(i => i.ImpactoClassificacao)
-        .WithMany() // Sem coleção inversa por enquanto
-        .HasForeignKey(i => i.ImpactoClassificacaoId);
-
+            //Mantem
             modelBuilder.Entity<ImagensCapturadasModel>()
                 .HasOne(i => i.Local)
-                .WithMany(l => l.ImagensCapturadas) // você pode criar essa propriedade no LocalModel
+                .WithMany(l => l.ImagensCapturadas) 
                 .HasForeignKey(i => i.IdLocal);
+
+            modelBuilder.Entity<ImpactoModel>()
+.HasOne(i => i.ImpactoClassificacao)
+.WithMany() // Sem coleção inversa por enquanto
+.HasForeignKey(i => i.ImpactoClassificacaoId);
+
+
 
             modelBuilder.Entity<ImagensCapturadasModel>()
                 .HasOne(i => i.ImpactoClassificacao)
@@ -58,9 +60,12 @@ namespace TheGuardiansEyesData
                 .HasForeignKey(i => i.IdImpactoClassificacao);
 
             modelBuilder.Entity<ImagensCapturadasModel>()
-                .HasOne(i => i.Drone)
-                .WithMany()
-                .HasForeignKey(i => i.IdDrone);
+.HasOne(i => i.Drone)
+.WithMany()
+.HasForeignKey(i => i.IdDrone);
+
+
+
 
             modelBuilder.Entity<DesastreModel>()
     .HasOne(d => d.Local)
@@ -69,10 +74,11 @@ namespace TheGuardiansEyesData
     .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<DesastreModel>()
-                .HasOne(d => d.ImpactoClassificacao)
-                .WithMany(ic => ic.Desastres)
-                .HasForeignKey(d => d.Impacto)
-                .OnDelete(DeleteBehavior.Restrict);
+            .HasOne(d => d.ImpactoClassificacao)
+            .WithMany(ic => ic.Desastres)
+            .HasForeignKey(d => d.Impacto)
+            .OnDelete(DeleteBehavior.Restrict);
+
 
             modelBuilder.Entity<DesastreModel>()
                 .HasOne(d => d.GrupoDesastre)
@@ -80,18 +86,32 @@ namespace TheGuardiansEyesData
                 .HasForeignKey(d => d.IdGrupoDesastre)
                 .OnDelete(DeleteBehavior.Restrict);
 
+
             modelBuilder.Entity<DesastreModel>()
                 .HasOne(d => d.Usuario)
                 .WithMany(u => u.Desastres)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<ImagensCapturadasModel>()
+                
+                            modelBuilder.Entity<ImagensCapturadasModel>()
                 .HasOne(imagem => imagem.   Desastre)
                 .WithMany(desastre => desastre.ImagensCapturadas)
                 .HasForeignKey(imagem => imagem.IdDesastre)
                 .OnDelete(DeleteBehavior.Cascade);  // ou Restrict, conforme sua regra de negócio
     
+
+//--------------------------
+
+
+
+
+
+
+
+
+
+
+
         }
 
         

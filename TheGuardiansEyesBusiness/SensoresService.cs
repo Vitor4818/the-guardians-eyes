@@ -20,24 +20,36 @@ namespace TheGuardiansEyesBusiness
         }
 
         // OBTER POR ID
-        public SensoresModel? ObterPorId(int id)
+        public SensoresModel ObterPorId(int id)
         {
-            return _context.Sensores.FirstOrDefault(s => s.Id == id);
+            var sensor = _context.Sensores.FirstOrDefault(s => s.Id == id);
+            if (sensor == null)
+                throw new KeyNotFoundException("Sensor não encontrado.");
+            
+            return sensor;
         }
 
         // CADASTRAR
         public SensoresModel CadastrarSensor(SensoresModel sensor)
         {
-            _context.Sensores.Add(sensor);
-            _context.SaveChanges();
-            return sensor;
+            try
+            {
+                _context.Sensores.Add(sensor);
+                _context.SaveChanges();
+                return sensor;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Erro ao cadastrar sensor. Verifique os dados fornecidos ou conflitos de integridade.", ex);
+            }
         }
 
         // ATUALIZAR
-        public bool AtualizarSensor(SensoresModel sensor)
+        public SensoresModel AtualizarSensor(SensoresModel sensor)
         {
             var existente = _context.Sensores.Find(sensor.Id);
-            if (existente == null) return false;
+            if (existente == null)
+                throw new KeyNotFoundException("Sensor para atualização não encontrado.");
 
             existente.Chip = sensor.Chip;
             existente.Modelo = sensor.Modelo;
@@ -49,20 +61,34 @@ namespace TheGuardiansEyesBusiness
             existente.TipoSaida = sensor.TipoSaida;
             existente.MediaTensaoRegistrada = sensor.MediaTensaoRegistrada;
 
-            _context.Sensores.Update(existente);
-            _context.SaveChanges();
-            return true;
+            try
+            {
+                _context.Sensores.Update(existente);
+                _context.SaveChanges();
+                return existente;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Erro ao atualizar sensor. Verifique os dados fornecidos.", ex);
+            }
         }
 
         // REMOVER
-        public bool RemoverSensor(int id)
+        public void RemoverSensor(int id)
         {
             var sensor = _context.Sensores.Find(id);
-            if (sensor == null) return false;
+            if (sensor == null)
+                throw new KeyNotFoundException("Sensor para exclusão não encontrado.");
 
-            _context.Sensores.Remove(sensor);
-            _context.SaveChanges();
-            return true;
+            try
+            {
+                _context.Sensores.Remove(sensor);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Erro ao excluir sensor. Verifique se há vínculos com outros dados.", ex);
+            }
         }
     }
 }

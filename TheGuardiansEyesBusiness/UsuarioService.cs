@@ -17,39 +17,57 @@ namespace TheGuardiansEyesBusiness
         public List<UsuarioModel> ListarUsuarios()
         {
             return _context.Usuarios
-                .Include(u => u.Desastres) // Inclui os desastres relacionados
+                .Include(u => u.Desastres)
                 .ToList();
         }
 
         // OBTER POR ID
-        public UsuarioModel? ObterPorId(int id)
+        public UsuarioModel ObterPorId(int id)
         {
-            return _context.Usuarios
+            var usuario = _context.Usuarios
                 .Include(u => u.Desastres)
                 .FirstOrDefault(u => u.Id == id);
+
+            if (usuario == null)
+                throw new KeyNotFoundException("Usuário não encontrado.");
+
+            return usuario;
         }
 
         // OBTER POR CPF
-        public UsuarioModel? ObterPorCpf(string cpf)
+        public UsuarioModel ObterPorCpf(string cpf)
         {
-            return _context.Usuarios
+            var usuario = _context.Usuarios
                 .Include(u => u.Desastres)
                 .FirstOrDefault(u => u.Cpf == cpf);
+
+            if (usuario == null)
+                throw new KeyNotFoundException("Usuário com CPF não encontrado.");
+
+            return usuario;
         }
 
         // CADASTRAR
         public UsuarioModel CadastrarUsuario(UsuarioModel usuario)
         {
-            _context.Usuarios.Add(usuario);
-            _context.SaveChanges();
-            return usuario;
+            try
+            {
+                _context.Usuarios.Add(usuario);
+                _context.SaveChanges();
+                return usuario;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Erro ao cadastrar usuário. Verifique se o CPF já existe ou se há restrições de integridade.", ex);
+            }
         }
 
         // ATUALIZAR
-        public bool AtualizarUsuario(UsuarioModel usuario)
+        public UsuarioModel AtualizarUsuario(UsuarioModel usuario)
         {
             var existente = _context.Usuarios.Find(usuario.Id);
-            if (existente == null) return false;
+            if (existente == null)
+                throw new KeyNotFoundException("Usuário para atualização não encontrado.");
 
             existente.Nome = usuario.Nome;
             existente.Sobrenome = usuario.Sobrenome;
@@ -59,20 +77,34 @@ namespace TheGuardiansEyesBusiness
             existente.Email = usuario.Email;
             existente.Senha = usuario.Senha;
 
-            _context.Usuarios.Update(existente);
-            _context.SaveChanges();
-            return true;
+            try
+            {
+                _context.Usuarios.Update(existente);
+                _context.SaveChanges();
+                return existente;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Erro ao atualizar o usuário. Verifique os dados fornecidos.", ex);
+            }
         }
 
         // REMOVER
-        public bool RemoverUsuario(int id)
+        public void RemoverUsuario(int id)
         {
             var usuario = _context.Usuarios.Find(id);
-            if (usuario == null) return false;
+            if (usuario == null)
+                throw new KeyNotFoundException("Usuário para exclusão não encontrado.");
 
-            _context.Usuarios.Remove(usuario);
-            _context.SaveChanges();
-            return true;
+            try
+            {
+                _context.Usuarios.Remove(usuario);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Erro ao excluir o usuário. Verifique se ele está vinculado a outros dados.", ex);
+            }
         }
     }
 }

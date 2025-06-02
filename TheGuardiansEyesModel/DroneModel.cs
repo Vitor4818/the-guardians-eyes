@@ -14,7 +14,6 @@ public class DroneModel
     public required string Camera { get; set; }
     public required int Peso { get; set; }
 
-    // Navegação para Imagens
     [JsonIgnore]
     public ICollection<ImagensCapturadasModel>? ImagensCapturadas { get; set; }
 

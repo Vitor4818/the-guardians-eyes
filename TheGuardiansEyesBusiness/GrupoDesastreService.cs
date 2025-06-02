@@ -17,50 +17,77 @@ namespace TheGuardiansEyesBusiness
         public List<GrupoDesastreModel> ListarGrupos()
         {
             return _context.GruposDesastre
-                .Include(g => g.Subgrupos)  // Inclui os subgrupos relacionados
-                .Include(g => g.Desastres)  // Inclui os desastres relacionados
+                .Include(g => g.Subgrupos)
+                .Include(g => g.Desastres)
                 .ToList();
         }
 
         // OBTER POR ID
-        public GrupoDesastreModel? ObterPorId(int id)
+        public GrupoDesastreModel ObterPorId(int id)
         {
-            return _context.GruposDesastre
+            var grupo = _context.GruposDesastre
                 .Include(g => g.Subgrupos)
                 .Include(g => g.Desastres)
                 .FirstOrDefault(g => g.Id == id);
+
+            if (grupo == null)
+                throw new KeyNotFoundException("Grupo de desastre não encontrado.");
+
+            return grupo;
         }
 
         // CADASTRAR
         public GrupoDesastreModel CadastrarGrupo(GrupoDesastreModel grupo)
         {
-            _context.GruposDesastre.Add(grupo);
-            _context.SaveChanges();
-            return grupo;
+            try
+            {
+                _context.GruposDesastre.Add(grupo);
+                _context.SaveChanges();
+                return grupo;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Erro ao cadastrar grupo de desastre. Verifique os dados informados.", ex);
+            }
         }
 
         // ATUALIZAR
         public bool AtualizarGrupo(GrupoDesastreModel grupo)
         {
             var existente = _context.GruposDesastre.Find(grupo.Id);
-            if (existente == null) return false;
+            if (existente == null)
+                throw new KeyNotFoundException("Grupo de desastre não encontrado para atualização.");
 
-            existente.NomeGrupo = grupo.NomeGrupo;
-
-            _context.GruposDesastre.Update(existente);
-            _context.SaveChanges();
-            return true;
+            try
+            {
+                existente.NomeGrupo = grupo.NomeGrupo;
+                _context.GruposDesastre.Update(existente);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Erro ao atualizar grupo de desastre. Verifique os dados informados.", ex);
+            }
         }
 
         // REMOVER
         public bool RemoverGrupo(int id)
         {
             var grupo = _context.GruposDesastre.Find(id);
-            if (grupo == null) return false;
+            if (grupo == null)
+                throw new KeyNotFoundException("Grupo de desastre não encontrado para remoção.");
 
-            _context.GruposDesastre.Remove(grupo);
-            _context.SaveChanges();
-            return true;
+            try
+            {
+                _context.GruposDesastre.Remove(grupo);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Erro ao remover grupo de desastre. Pode haver entidades relacionadas.", ex);
+            }
         }
     }
 }

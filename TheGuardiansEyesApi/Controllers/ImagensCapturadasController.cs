@@ -23,21 +23,39 @@ namespace TheGuardiansEyesApi.Controllers
             _localService = localService;
         }
 
-        // GET: api/imagenscapturadas
-        [HttpGet]
-        public IActionResult Get()
-        {
-            var imagens = _imagemService.ListarImagens();
-            return imagens.Count == 0 ? NoContent() : Ok(imagens);
-        }
+// GET: api/imagenscapturadas
+[HttpGet]
+public IActionResult Get()
+{
+    try
+    {
+        var imagens = _imagemService.ListarImagens();
+        return imagens.Count == 0 ? NoContent() : Ok(imagens);
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(500, new { mensagem = "Erro ao listar imagens.", detalhe = ex.Message });
+    }
+}
 
-        // GET: api/imagenscapturadas/{id}
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            var imagem = _imagemService.ObterPorId(id);
-            return imagem == null ? NotFound() : Ok(imagem);
-        }
+// GET: api/imagenscapturadas/{id}
+[HttpGet("{id}")]
+public IActionResult Get(int id)
+{
+    try
+    {
+        var imagem = _imagemService.ObterPorId(id);
+        return Ok(imagem);
+    }
+    catch (KeyNotFoundException ex)
+    {
+        return NotFound(new { mensagem = ex.Message });
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(500, new { mensagem = "Erro ao buscar imagem por ID.", detalhe = ex.Message });
+    }
+}
 
 
 
@@ -78,21 +96,43 @@ public async Task<IActionResult> Post([FromBody] ImagensCapturadasModel imagem)
 
 
 
-        // PUT: api/imagenscapturadas/{id}
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ImagensCapturadasModel imagem)
-        {
-            if (imagem == null || imagem.Id != id)
-                return BadRequest("Dados inconsistentes.");
+[HttpPut("{id}")]
+public IActionResult Put(int id, [FromBody] ImagensCapturadasModel imagem)
+{
+    if (imagem == null || imagem.Id != id)
+        return BadRequest("Dados inconsistentes.");
 
-            return _imagemService.AtualizarImagem(imagem) ? NoContent() : NotFound();
-        }
+    try
+    {
+        _imagemService.AtualizarImagem(imagem);
+        return NoContent();
+    }
+    catch (KeyNotFoundException)
+    {
+        return NotFound("Imagem não encontrada.");
+    }
+    catch (InvalidOperationException ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
 
-        // DELETE: api/imagenscapturadas/{id}
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            return _imagemService.RemoverImagem(id) ? NoContent() : NotFound();
-        }
+[HttpDelete("{id}")]
+public IActionResult Delete(int id)
+{
+    try
+    {
+        _imagemService.RemoverImagem(id);
+        return NoContent();
+    }
+    catch (KeyNotFoundException)
+    {
+        return NotFound("Imagem não encontrada.");
+    }
+    catch (InvalidOperationException ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
     }
 }
