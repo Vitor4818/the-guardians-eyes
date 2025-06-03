@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TheGuardiansEyesModel;
 using TheGuardiansEyesBusiness;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace UsuariosApi.Controllers
 {
@@ -18,14 +19,30 @@ namespace UsuariosApi.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Lista todos os usuários cadastrados.
+        /// </summary>
+        /// <returns>Lista de usuários.</returns>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [SwaggerOperation(Summary = "Lista todos os usuários", Description = "Retorna todos os usuários cadastrados no sistema.")]
         public IActionResult Get()
         {
             var usuarios = usuarioService.ListarUsuarios();
             return usuarios.Count == 0 ? NoContent() : Ok(usuarios);
         }
 
+        /// <summary>
+        /// Obtém um usuário pelo ID.
+        /// </summary>
+        /// <param name="id">ID do usuário.</param>
+        /// <returns>Dados do usuário.</returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Busca um usuário por ID", Description = "Retorna os dados de um usuário específico pelo seu ID.")]
         public IActionResult Get(int id)
         {
             try
@@ -44,7 +61,16 @@ namespace UsuariosApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtém um usuário pelo CPF.
+        /// </summary>
+        /// <param name="cpf">CPF do usuário.</param>
+        /// <returns>Dados do usuário.</returns>
         [HttpGet("cpf")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Busca um usuário por CPF", Description = "Retorna os dados de um usuário específico através do CPF.")]
         public IActionResult GetPorCpf(string cpf)
         {
             try
@@ -63,7 +89,16 @@ namespace UsuariosApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Cadastra um novo usuário.
+        /// </summary>
+        /// <param name="usuario">Dados do usuário a ser cadastrado.</param>
+        /// <returns>Usuário criado.</returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Cadastra um novo usuário", Description = "Cadastra um novo usuário com os dados fornecidos.")]
         public IActionResult Post([FromBody] UsuarioModel usuario)
         {
             if (string.IsNullOrWhiteSpace(usuario.Nome) ||
@@ -94,7 +129,18 @@ namespace UsuariosApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualiza os dados de um usuário existente.
+        /// </summary>
+        /// <param name="id">ID do usuário a ser atualizado.</param>
+        /// <param name="usuario">Dados atualizados do usuário.</param>
+        /// <returns>Resposta sem conteúdo.</returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Atualiza um usuário", Description = "Atualiza os dados de um usuário existente.")]
         public IActionResult Put(int id, [FromBody] UsuarioModel usuario)
         {
             if (usuario == null || usuario.Id != id)
@@ -121,7 +167,17 @@ namespace UsuariosApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove um usuário do sistema.
+        /// </summary>
+        /// <param name="id">ID do usuário a ser removido.</param>
+        /// <returns>Resposta sem conteúdo.</returns>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Remove um usuário", Description = "Remove um usuário do sistema com base no ID informado.")]
         public IActionResult Delete(int id)
         {
             try

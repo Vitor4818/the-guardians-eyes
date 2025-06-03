@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TheGuardiansEyesModel;
 using TheGuardiansEyesBusiness;
+using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System;
 
 namespace TheGuardiansEyesApi.Controllers
 {
@@ -18,8 +22,14 @@ namespace TheGuardiansEyesApi.Controllers
             _logger = logger;
         }
 
-        // GET: api/terrenogeografico
+        /// <summary>
+        /// Lista todos os terrenos geográficos cadastrados.
+        /// </summary>
+        /// <returns>Lista de terrenos geográficos.</returns>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [SwaggerOperation(Summary = "Lista todos os terrenos geográficos", Description = "Retorna todos os terrenos geográficos cadastrados no sistema.")]
         public IActionResult Get()
         {
             try
@@ -34,25 +44,33 @@ namespace TheGuardiansEyesApi.Controllers
             }
         }
 
-        // GET: api/terrenogeografico/{id}
-[HttpGet("{id}")]
-public IActionResult Get(int id)
-{
-    try
-    {
-        var terreno = terrenoService.ObterPorId(id);
-        return Ok(terreno);
-    }
-    catch (KeyNotFoundException ex)
-    {
-        _logger.LogWarning(ex, "Terreno geográfico não encontrado.");
-        return NotFound(ex.Message);
-    }
-    catch (Exception ex)
-    {
-        _logger.LogError(ex, "Erro ao buscar terreno geográfico por ID.");
-        return StatusCode(500, "Erro interno ao buscar o terreno.");
-    }
-}
+        /// <summary>
+        /// Obtém um terreno geográfico pelo ID.
+        /// </summary>
+        /// <param name="id">ID do terreno geográfico.</param>
+        /// <returns>Dados do terreno geográfico.</returns>
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Busca um terreno geográfico por ID", Description = "Retorna os dados de um terreno geográfico específico pelo seu ID.")]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                var terreno = terrenoService.ObterPorId(id);
+                return Ok(terreno);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                _logger.LogWarning(ex, "Terreno geográfico não encontrado.");
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao buscar terreno geográfico por ID.");
+                return StatusCode(500, "Erro interno ao buscar o terreno.");
+            }
+        }
     }
 }

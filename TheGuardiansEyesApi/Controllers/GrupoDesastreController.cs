@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using TheGuardiansEyesModel;
 using TheGuardiansEyesBusiness;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace TheGuardiansEyesApi.Controllers
 {
@@ -15,16 +17,29 @@ namespace TheGuardiansEyesApi.Controllers
             _grupoService = grupoService;
         }
 
-        // GET: api/grupodesastre
+        /// <summary>
+        /// Lista todos os grupos de desastre cadastrados.
+        /// </summary>
+        /// <returns>Lista de grupos de desastre.</returns>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [SwaggerOperation(Summary = "Lista todos os grupos de desastre", Description = "Retorna todos os grupos de desastre cadastrados no sistema.")]
         public IActionResult Get()
         {
             var grupos = _grupoService.ListarGrupos();
             return grupos.Count == 0 ? NoContent() : Ok(grupos);
         }
 
-        // GET: api/grupodesastre/{id}
+        /// <summary>
+        /// Obtém um grupo de desastre pelo ID.
+        /// </summary>
+        /// <param name="id">ID do grupo de desastre.</param>
+        /// <returns>Dados do grupo de desastre.</returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [SwaggerOperation(Summary = "Busca um grupo de desastre por ID", Description = "Retorna os dados de um grupo de desastre específico pelo seu ID.")]
         public IActionResult Get(int id)
         {
             try
@@ -38,8 +53,15 @@ namespace TheGuardiansEyesApi.Controllers
             }
         }
 
-        // POST: api/grupodesastre
+        /// <summary>
+        /// Cadastra um novo grupo de desastre.
+        /// </summary>
+        /// <param name="grupo">Dados do grupo de desastre a ser cadastrado.</param>
+        /// <returns>Grupo de desastre criado.</returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [SwaggerOperation(Summary = "Cadastra um novo grupo de desastre", Description = "Cadastra um novo grupo de desastre com os dados fornecidos.")]
         public IActionResult Post([FromBody] GrupoDesastreModel grupo)
         {
             if (string.IsNullOrWhiteSpace(grupo.NomeGrupo))
@@ -56,8 +78,17 @@ namespace TheGuardiansEyesApi.Controllers
             }
         }
 
-        // PUT: api/grupodesastre/{id}
+        /// <summary>
+        /// Atualiza os dados de um grupo de desastre existente.
+        /// </summary>
+        /// <param name="id">ID do grupo de desastre a ser atualizado.</param>
+        /// <param name="grupo">Dados atualizados do grupo de desastre.</param>
+        /// <returns>Resposta sem conteúdo.</returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [SwaggerOperation(Summary = "Atualiza um grupo de desastre", Description = "Atualiza os dados de um grupo de desastre existente.")]
         public IActionResult Put(int id, [FromBody] GrupoDesastreModel grupo)
         {
             if (grupo == null || grupo.Id != id)
@@ -78,8 +109,16 @@ namespace TheGuardiansEyesApi.Controllers
             }
         }
 
-        // DELETE: api/grupodesastre/{id}
+        /// <summary>
+        /// Remove um grupo de desastre do sistema.
+        /// </summary>
+        /// <param name="id">ID do grupo de desastre a ser removido.</param>
+        /// <returns>Resposta sem conteúdo.</returns>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [SwaggerOperation(Summary = "Remove um grupo de desastre", Description = "Remove um grupo de desastre do sistema com base no ID informado.")]
         public IActionResult Delete(int id)
         {
             try

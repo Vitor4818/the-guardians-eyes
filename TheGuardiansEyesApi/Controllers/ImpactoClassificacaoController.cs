@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using TheGuardiansEyesModel;
 using TheGuardiansEyesBusiness;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace TheGuardiansEyesApi.Controllers
 {
@@ -17,7 +19,18 @@ namespace TheGuardiansEyesApi.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Lista todas as classificações de impacto cadastradas.
+        /// </summary>
+        /// <returns>Lista de classificações de impacto.</returns>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Lista todas as classificações de impacto",
+            Description = "Retorna todas as classificações de impacto cadastradas no sistema."
+        )]
         public IActionResult Get()
         {
             try
@@ -32,7 +45,19 @@ namespace TheGuardiansEyesApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtém uma classificação de impacto pelo ID.
+        /// </summary>
+        /// <param name="id">ID da classificação de impacto.</param>
+        /// <returns>Dados da classificação de impacto.</returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Busca uma classificação de impacto por ID",
+            Description = "Retorna os dados de uma classificação de impacto específica pelo seu ID."
+        )]
         public IActionResult Get(int id)
         {
             try
