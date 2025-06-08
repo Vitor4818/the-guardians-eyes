@@ -11,6 +11,7 @@
           "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.5",
           "Microsoft.AspNetCore.OpenApi": "9.0.2",
           "Microsoft.EntityFrameworkCore.Design": "9.0.5",
+          "Microsoft.Extensions.Caching.Memory": "9.0.5",
           "Oracle.EntityFrameworkCore": "9.23.80",
           "Swashbuckle.AspNetCore": "8.1.2",
           "Swashbuckle.AspNetCore.Annotations": "8.1.2",
