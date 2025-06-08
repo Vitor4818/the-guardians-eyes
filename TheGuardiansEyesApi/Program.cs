@@ -75,6 +75,13 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
+//Aplciando as migrations
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -83,6 +90,7 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "TheGuardiansEyes API v1");
     });
 }
+
 
 
 app.UseHttpsRedirection();

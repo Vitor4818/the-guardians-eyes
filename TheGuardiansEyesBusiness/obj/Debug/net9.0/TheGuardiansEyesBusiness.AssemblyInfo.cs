@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TheGuardiansEyesBusiness")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3d7fb5d47a2a4aacfa855722cd97ac4de4665c2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3e1f2e325ee6beed186a8a08d1682b9d84061ba")]
 [assembly: System.Reflection.AssemblyProductAttribute("TheGuardiansEyesBusiness")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TheGuardiansEyesBusiness")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
