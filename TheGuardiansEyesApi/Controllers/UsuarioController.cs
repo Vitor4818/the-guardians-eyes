@@ -3,9 +3,11 @@ using Microsoft.Extensions.Logging;
 using TheGuardiansEyesModel;
 using TheGuardiansEyesBusiness;
 using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UsuariosApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class UsuarioController : ControllerBase

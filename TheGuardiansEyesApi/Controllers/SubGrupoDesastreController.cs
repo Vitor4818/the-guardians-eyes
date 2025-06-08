@@ -3,9 +3,11 @@ using Microsoft.Extensions.Logging;
 using TheGuardiansEyesBusiness;
 using TheGuardiansEyesModel;
 using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TheGuardiansEyesApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class SubGrupoDesastreController : ControllerBase

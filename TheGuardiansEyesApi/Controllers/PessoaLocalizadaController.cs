@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TheGuardiansEyesApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PessoaLocalizadaController : ControllerBase

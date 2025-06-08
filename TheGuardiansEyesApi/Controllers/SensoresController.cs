@@ -4,9 +4,11 @@ using TheGuardiansEyesBusiness;
 using TheGuardiansEyesModel;
 using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TheGuardiansEyesApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class SensoresController : ControllerBase

@@ -45,7 +45,7 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
-    options.RequireHttpsMetadata = false;
+    options.RequireHttpsMetadata = true;
     options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -83,8 +83,14 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "TheGuardiansEyes API v1");
     });
 }
+
+
+app.UseHttpsRedirection();
 app.UseAuthentication(); 
 app.UseAuthorization();
-app.UseHttpsRedirection();
+
+
+
+
 app.MapControllers();
 app.Run();

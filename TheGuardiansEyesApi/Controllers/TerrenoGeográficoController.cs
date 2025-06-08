@@ -6,9 +6,11 @@ using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TheGuardiansEyesApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class TerrenoGeograficoController : ControllerBase
