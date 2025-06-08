@@ -135,37 +135,38 @@ namespace UsuariosApi.Controllers
         /// <param name="id">ID do usuário a ser atualizado.</param>
         /// <param name="usuario">Dados atualizados do usuário.</param>
         /// <returns>Resposta sem conteúdo.</returns>
-        [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [SwaggerOperation(Summary = "Atualiza um usuário", Description = "Atualiza os dados de um usuário existente.")]
-        public IActionResult Put(int id, [FromBody] UsuarioModel usuario)
-        {
-            if (usuario == null || usuario.Id != id)
-                return BadRequest("Dados inconsistentes.");
+       [HttpPut("{id}")]
+[ProducesResponseType(StatusCodes.Status204NoContent)]
+[ProducesResponseType(StatusCodes.Status400BadRequest)]
+[ProducesResponseType(StatusCodes.Status404NotFound)]
+[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+[SwaggerOperation(Summary = "Atualiza um usuário", Description = "Atualiza os dados de um usuário existente.")]
+public IActionResult Put(int id, [FromBody] UsuarioModel usuario)
+{
+    if (usuario == null)
+        return BadRequest("Dados inválidos.");
 
-            try
-            {
-                usuarioService.AtualizarUsuario(usuario);
-                return NoContent();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound("Usuário não encontrado para atualização.");
-            }
-            catch (InvalidOperationException ex)
-            {
-                _logger.LogWarning(ex, "Erro ao atualizar usuário.");
-                return BadRequest("Erro ao atualizar o usuário. Verifique os dados fornecidos.");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Erro inesperado ao atualizar usuário.");
-                return StatusCode(500, "Erro inesperado. Tente novamente mais tarde.");
-            }
-        }
+    try
+    {
+        usuarioService.AtualizarUsuario(id, usuario);
+        return NoContent();
+    }
+    catch (KeyNotFoundException)
+    {
+        return NotFound("Usuário não encontrado para atualização.");
+    }
+    catch (InvalidOperationException ex)
+    {
+        _logger.LogWarning(ex, "Erro ao atualizar usuário.");
+        return BadRequest("Erro ao atualizar o usuário. Verifique os dados fornecidos.");
+    }
+    catch (Exception ex)
+    {
+        _logger.LogError(ex, "Erro inesperado ao atualizar usuário.");
+        return StatusCode(500, "Erro inesperado. Tente novamente mais tarde.");
+    }
+}
+
 
         /// <summary>
         /// Remove um usuário do sistema.

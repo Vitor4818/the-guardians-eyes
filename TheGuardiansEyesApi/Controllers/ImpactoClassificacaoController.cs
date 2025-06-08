@@ -41,7 +41,12 @@ namespace TheGuardiansEyesApi.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao listar classificações de impacto.");
-                return StatusCode(500, "Erro interno ao listar classificações.");
+               return StatusCode(500, new ProblemDetails
+                {
+                    Title = "Erro interno",
+                    Detail = ex.Message,
+                    Status = 500
+                });
             }
         }
 
@@ -60,6 +65,9 @@ namespace TheGuardiansEyesApi.Controllers
         )]
         public IActionResult Get(int id)
         {
+            if (id <= 0)
+            return BadRequest("ID inválido.");
+            
             try
             {
                 var item = _service.ObterPorId(id);
@@ -73,7 +81,12 @@ namespace TheGuardiansEyesApi.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Erro ao buscar classificação de impacto com ID {id}.");
-                return StatusCode(500, "Erro interno ao buscar classificação.");
+                                return StatusCode(500, new ProblemDetails
+                {
+                    Title = "Erro interno",
+                    Detail = ex.Message,
+                    Status = 500
+                });
             }
         }
     }

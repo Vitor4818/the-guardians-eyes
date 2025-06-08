@@ -102,9 +102,12 @@ namespace TheGuardiansEyesApi.Controllers
         [SwaggerOperation(Summary = "Cadastra um novo local", Description = "Cadastra um novo local com os dados fornecidos.")]
         public IActionResult Post([FromBody] LocalModel local)
         {
-            if (local == null || local.Latitude == 0 || local.Longitude == 0)
-                return BadRequest("Latitude e Longitude devem ser fornecidas e válidas.");
-
+                        if (local == null 
+                || local.Latitude < -90 || local.Latitude > 90 
+                || local.Longitude < -180 || local.Longitude > 180)
+            {
+                return BadRequest("Latitude e Longitude devem ser fornecidas e estar dentro dos limites válidos.");
+            }
             try
             {
                 var criado = _localService.CadastrarLocal(local);

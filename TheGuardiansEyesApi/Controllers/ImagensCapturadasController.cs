@@ -112,7 +112,6 @@ namespace TheGuardiansEyesApi.Controllers
                     return NotFound("Nenhum desastre próximo encontrado para a localização do local.");
 
                 imagem.IdDesastre = desastreProximo.Id;
-                imagem.IdLocal = desastreProximo.IdLocal;
 
                 var criada = await _imagemService.CadastrarImagemAsync(imagem);
                 return CreatedAtAction(nameof(Get), new { id = criada.Id }, criada);

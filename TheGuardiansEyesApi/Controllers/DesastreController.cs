@@ -86,7 +86,7 @@ namespace TheGuardiansEyesApi.Controllers
         {
             if (desastre == null ||
                 desastre.IdLocal <= 0 ||
-                desastre.Impacto <= 0 ||
+                desastre.IdImpactoClassificacao <= 0 ||
                 desastre.IdGrupoDesastre <= 0 ||
                 desastre.IdUsuario <= 0 ||
                 string.IsNullOrWhiteSpace(desastre.DataOcorrencia))

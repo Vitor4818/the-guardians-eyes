@@ -92,7 +92,7 @@ namespace TheGuardiansEyesApi.Controllers
         public IActionResult Put(int id, [FromBody] GrupoDesastreModel grupo)
         {
             if (grupo == null || grupo.Id != id)
-                return BadRequest("Dados inconsistentes.");
+                return BadRequest("O ID do corpo não corresponde ao ID da URL.");
 
             try
             {

@@ -22,6 +22,17 @@ namespace TheGuardiansEyesApi.Controllers
             _logger = logger;
         }
 
+        private ObjectResult InternalError(Exception ex, string mensagemLog)
+        {          
+        _logger.LogError(ex, mensagemLog);
+        return StatusCode(500, new ProblemDetails
+        {
+            Title = "Erro interno",
+            Detail = ex.Message,
+            Status = 500
+        });
+        }
+
         /// <summary>
         /// Lista todos os impactos cadastrados.
         /// </summary>
@@ -40,7 +51,8 @@ namespace TheGuardiansEyesApi.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao listar impactos.");
-                return StatusCode(500, "Erro interno ao buscar impactos.");
+                return InternalError(ex, $"Erro ao atualizar impacto");
+
             }
         }
 
@@ -66,7 +78,8 @@ namespace TheGuardiansEyesApi.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Erro ao buscar impacto com ID {id}.");
-                return StatusCode(500, "Erro interno ao buscar o impacto.");
+                return InternalError(ex, $"Erro ao buscar pelo impacto com ID {id}.");
+
             }
         }
 
@@ -83,7 +96,7 @@ namespace TheGuardiansEyesApi.Controllers
         public IActionResult Post([FromBody] ImpactoModel impacto)
         {
           if (impacto == null || impacto.ImpactoClassificacaoId <= 0)
-              return BadRequest("Dados inválidos.");
+            return BadRequest("Impacto inválido. Verifique o campo ImpactoClassificacaoId.");
 
             try
             {
@@ -98,7 +111,8 @@ namespace TheGuardiansEyesApi.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro inesperado ao cadastrar impacto.");
-                return StatusCode(500, "Erro interno ao cadastrar impacto.");
+                return InternalError(ex, $"Erro ao cadastrar Impacto");
+
             }
         }
 
@@ -132,12 +146,12 @@ namespace TheGuardiansEyesApi.Controllers
             catch (InvalidOperationException ex)
             {
                 _logger.LogWarning(ex, "Erro ao atualizar impacto.");
-                return BadRequest("Erro ao atualizar o impacto. Verifique os dados fornecidos.");
+                return BadRequest("Dados inconsistentes: o ID informado na URL difere do corpo da requisição.");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Erro ao atualizar impacto com ID {id}.");
-                return StatusCode(500, "Erro interno ao atualizar impacto.");
+               return InternalError(ex, $"Erro ao atualizar impacto com ID {id}.");
+
             }
         }
 
@@ -154,6 +168,9 @@ namespace TheGuardiansEyesApi.Controllers
         [SwaggerOperation(Summary = "Remove um impacto", Description = "Remove um impacto do sistema com base no ID informado.")]
         public IActionResult Delete(int id)
         {
+            if (id <= 0)
+                 return BadRequest("ID inválido.");
+
             try
             {
                 impactoService.RemoverImpacto(id);
@@ -171,8 +188,8 @@ namespace TheGuardiansEyesApi.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Erro inesperado ao excluir impacto com ID {id}.");
-                return StatusCode(500, "Erro interno ao remover impacto.");
+            _logger.LogError(ex, "Erro ao excluir impacto.");
+                return InternalError(ex, $"Erro ao excluir impacto com ID {id}.");
             }
         }
     }
