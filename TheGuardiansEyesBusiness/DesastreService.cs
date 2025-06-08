@@ -13,19 +13,19 @@ namespace TheGuardiansEyesBusiness
             _context = context;
         }
 
-        // LISTAR TODOS
+        //LISTAR TODOS
         public List<DesastreModel> ListarDesastres()
         {
             return _context.Desastres
                 .Include(d => d.Local)
                 .Include(d => d.ImpactoClassificacao)
-                    .ThenInclude(i => i.ImpactoClassificacao)
+                 .Include(d => d.ImpactoClassificacao) 
                 .Include(d => d.GrupoDesastre)
                 .Include(d => d.Usuario)
                 .ToList();
         }
 
-        // OBTER POR ID
+        //OBTER POR ID
         public DesastreModel ObterPorId(int id)
         {
             var desastre = _context.Desastres
@@ -38,10 +38,10 @@ namespace TheGuardiansEyesBusiness
             if (desastre == null)
                 throw new KeyNotFoundException("Desastre não encontrado.");
 
-            return desastre;
+            return desastre!;
         }
 
-        // CADASTRAR
+        //CADASTRAR
         public DesastreModel CadastrarDesastre(DesastreModel desastre)
         {
             try
@@ -56,7 +56,7 @@ namespace TheGuardiansEyesBusiness
             }
         }
 
-        // ATUALIZAR
+        //ATUALIZAR
         public bool AtualizarDesastre(DesastreModel desastre)
         {
             var existente = _context.Desastres.Find(desastre.Id);
@@ -64,7 +64,7 @@ namespace TheGuardiansEyesBusiness
                 throw new KeyNotFoundException("Desastre não encontrado para atualização.");
 
             existente.IdLocal = desastre.IdLocal;
-            existente.Impacto = desastre.Impacto;
+            existente.IdImpactoClassificacao = desastre.IdImpactoClassificacao;
             existente.IdGrupoDesastre = desastre.IdGrupoDesastre;
             existente.IdUsuario = desastre.IdUsuario;
             existente.Cobrade = desastre.Cobrade;
@@ -82,7 +82,7 @@ namespace TheGuardiansEyesBusiness
             }
         }
 
-        // REMOVER
+        //REMOVER
         public bool RemoverDesastre(int id)
         {
             var desastre = _context.Desastres.Find(id);
@@ -102,7 +102,7 @@ namespace TheGuardiansEyesBusiness
         }
 
         // OBTER MAIS PRÓXIMO
-        public DesastreModel? ObterDesastreMaisProximo(double latitude, double longitude, double raioKm = 0.5)
+        public DesastreModel? ObterDesastreMaisProximo(double latitude, double longitude, double raioKm = 10.0)
         {
             var desastres = _context.Desastres
                 .Include(d => d.Local)

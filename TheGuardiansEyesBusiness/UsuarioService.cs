@@ -46,48 +46,66 @@ namespace TheGuardiansEyesBusiness
 
             return usuario;
         }
+public UsuarioModel CadastrarUsuario(UsuarioModel usuario)
+{
+    // Evita gerar SQL com True/False no Oracle
+    var usuarioExistente = _context.Usuarios
+        .FirstOrDefault(u => u.Cpf == usuario.Cpf || u.Email == usuario.Email);
 
-        // CADASTRAR
-        public UsuarioModel CadastrarUsuario(UsuarioModel usuario)
-        {
-            try
-            {
-                _context.Usuarios.Add(usuario);
-                _context.SaveChanges();
-                return usuario;
-            }
-            catch (DbUpdateException ex)
-            {
-                throw new InvalidOperationException("Erro ao cadastrar usuário. Verifique se o CPF já existe ou se há restrições de integridade.", ex);
-            }
-        }
+    if (usuarioExistente != null)
+        throw new InvalidOperationException("Já existe um usuário com o mesmo CPF ou e-mail.");
 
-        // ATUALIZAR
-        public UsuarioModel AtualizarUsuario(UsuarioModel usuario)
-        {
-            var existente = _context.Usuarios.Find(usuario.Id);
-            if (existente == null)
-                throw new KeyNotFoundException("Usuário para atualização não encontrado.");
+    try
+    {
+        _context.Usuarios.Add(usuario);
+        _context.SaveChanges();
+        return usuario;
+    }
+    catch (DbUpdateException ex)
+    {
+        throw new InvalidOperationException("Erro ao cadastrar usuário. Verifique os dados.", ex);
+    }
+}
+// ATUALIZAR (com atualização parcial)
+public UsuarioModel AtualizarUsuario(int id, UsuarioModel usuario)
+{
+    var existente = _context.Usuarios.Find(id);
+    if (existente == null)
+        throw new KeyNotFoundException("Usuário para atualização não encontrado.");
 
-            existente.Nome = usuario.Nome;
-            existente.Sobrenome = usuario.Sobrenome;
-            existente.Cpf = usuario.Cpf;
-            existente.Cargo = usuario.Cargo;
-            existente.Funcao = usuario.Funcao;
-            existente.Email = usuario.Email;
-            existente.Senha = usuario.Senha;
+    // Atualiza apenas os campos não nulos/vazios
+    if (!string.IsNullOrWhiteSpace(usuario.Nome))
+        existente.Nome = usuario.Nome;
 
-            try
-            {
-                _context.Usuarios.Update(existente);
-                _context.SaveChanges();
-                return existente;
-            }
-            catch (DbUpdateException ex)
-            {
-                throw new InvalidOperationException("Erro ao atualizar o usuário. Verifique os dados fornecidos.", ex);
-            }
-        }
+    if (!string.IsNullOrWhiteSpace(usuario.Sobrenome))
+        existente.Sobrenome = usuario.Sobrenome;
+
+    if (!string.IsNullOrWhiteSpace(usuario.Cpf))
+        existente.Cpf = usuario.Cpf;
+
+    if (!string.IsNullOrWhiteSpace(usuario.Cargo))
+        existente.Cargo = usuario.Cargo;
+
+    if (!string.IsNullOrWhiteSpace(usuario.Funcao))
+        existente.Funcao = usuario.Funcao;
+
+    if (!string.IsNullOrWhiteSpace(usuario.Email))
+        existente.Email = usuario.Email;
+
+    if (!string.IsNullOrWhiteSpace(usuario.Senha))
+        existente.Senha = usuario.Senha;
+
+    try
+    {
+        _context.Update(existente);
+        _context.SaveChanges();
+        return existente;
+    }
+    catch (DbUpdateException ex)
+    {
+        throw new InvalidOperationException("Erro ao atualizar o usuário. Verifique os dados fornecidos.", ex);
+    }
+}
 
         // REMOVER
         public void RemoverUsuario(int id)

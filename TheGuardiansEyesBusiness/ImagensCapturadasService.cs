@@ -23,49 +23,68 @@ public class ImagensCapturadasService
         public double Confianca { get; set; }
     }
 
-    public async Task<ImagensCapturadasModel> CadastrarImagemAsync(ImagensCapturadasModel imagem)
+public async Task<ImagensCapturadasModel> CadastrarImagemAsync(ImagensCapturadasModel imagem)
+{
+    try
     {
-        try
+        //Envia a URL da imagem capturada para a API Python que classifica o impacto
+        var resposta = await _httpClient.PostAsJsonAsync(_apiPythonUrl, new { urlImagem = imagem.Hospedagem });
+
+        if (resposta.IsSuccessStatusCode)
         {
-            var resposta = await _httpClient.PostAsJsonAsync(_apiPythonUrl, new { urlImagem = imagem.Hospedagem });
+            //Lê a resposta da classificação (classe e confiança)
+            var classificacao = await resposta.Content.ReadFromJsonAsync<ClassificacaoResponse>();
 
-            if (resposta.IsSuccessStatusCode)
+            if (classificacao != null)
             {
-                var classificacao = await resposta.Content.ReadFromJsonAsync<ClassificacaoResponse>();
-
-                if (classificacao != null)
+                //Converte a string da classe para o respectivo Id de ImpactoClassificacao
+                imagem.IdImpactoClassificacao = classificacao.Classe.ToLower() switch
                 {
-                    imagem.IdImpactoClassificacao = classificacao.Classe.ToLower() switch
-                    {
-                        "leve" => 1,
-                        "moderado" => 2,
-                        "pesado" => 3,
-                        _ => 1
-                    };
-                }
-                else
-                {
-                    imagem.IdImpactoClassificacao = 1;
-                }
+                    "leve" => 1,
+                    "moderado" => 2,
+                    "pesado" => 3,
+                    _ => 1 // Default para "leve" se vier algo desconhecido
+                };
             }
             else
             {
-                imagem.IdImpactoClassificacao = 1;
+                imagem.IdImpactoClassificacao = 1; //Default em caso de falha na leitura da resposta
             }
+        }
+        else
+        {
+            imagem.IdImpactoClassificacao = 1; //Default em caso de erro na chamada
+        }
 
-            _context.ImagensCapturadas.Add(imagem);
-            await _context.SaveChangesAsync();
-            return imagem;
-        }
-        catch (DbUpdateException ex)
+        //Adiciona a imagem no banco de dados
+        _context.ImagensCapturadas.Add(imagem);
+
+        //Cria o registro de PessoaLocalizada (associando pessoa detectada ao local da imagem)
+        var pessoaLocalizada = new PessoaLocalizadaModel
         {
-            throw new InvalidOperationException("Erro ao cadastrar imagem. Verifique os dados fornecidos.", ex);
-        }
-        catch (HttpRequestException ex)
-        {
-            throw new InvalidOperationException("Erro ao comunicar com a API de classificação de imagem.", ex);
-        }
+            IdLocal = imagem.IdLocal, //Pega o local da imagem
+            DataHora = DateTime.Now, //Hora atual da detecção
+            IdImpactoClassificacao = imagem.IdImpactoClassificacao ?? 1 // Mesmo impacto da imagem
+        };
+
+        //Adiciona a pessoa localizada no banco de dados
+        _context.PessoasLocalizadas.Add(pessoaLocalizada);
+
+        //Salva as duas entidades no banco: imagem e pessoa localizada
+        await _context.SaveChangesAsync();
+
+        //Retorna a imagem cadastrada
+        return imagem;
     }
+    catch (DbUpdateException ex)
+    {
+        throw new InvalidOperationException("Erro ao cadastrar imagem. Verifique os dados fornecidos.", ex);
+    }
+    catch (HttpRequestException ex)
+    {
+        throw new InvalidOperationException("Erro ao comunicar com a API de classificação de imagem.", ex);
+    }
+}
 
     public List<ImagensCapturadasModel> ListarImagens()
     {
@@ -95,8 +114,9 @@ public class ImagensCapturadasService
     {
         var existente = _context.ImagensCapturadas.Find(imagem.Id);
         if (existente == null)
+        {
             throw new KeyNotFoundException("Imagem para atualização não encontrada.");
-
+        }
         existente.Hospedagem = imagem.Hospedagem;
         existente.Tamanho = imagem.Tamanho;
         existente.IdLocal = imagem.IdLocal;
