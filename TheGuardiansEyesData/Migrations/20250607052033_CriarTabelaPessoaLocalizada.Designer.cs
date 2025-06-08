@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
 using TheGuardiansEyesData;
@@ -11,9 +12,11 @@ using TheGuardiansEyesData;
 namespace TheGuardiansEyesData.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250607052033_CriarTabelaPessoaLocalizada")]
+    partial class CriarTabelaPessoaLocalizada
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,13 +43,13 @@ namespace TheGuardiansEyesData.Migrations
                     b.Property<int>("IdGrupoDesastre")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int>("IdImpactoClassificacao")
-                        .HasColumnType("NUMBER(10)");
-
                     b.Property<int>("IdLocal")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("IdUsuario")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int>("Impacto")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<int?>("TerrenoGeograficoModelId")
@@ -56,11 +59,11 @@ namespace TheGuardiansEyesData.Migrations
 
                     b.HasIndex("IdGrupoDesastre");
 
-                    b.HasIndex("IdImpactoClassificacao");
-
                     b.HasIndex("IdLocal");
 
                     b.HasIndex("IdUsuario");
+
+                    b.HasIndex("Impacto");
 
                     b.HasIndex("TerrenoGeograficoModelId");
 
@@ -265,18 +268,13 @@ namespace TheGuardiansEyesData.Migrations
 
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DataHora")
+                    b.Property<DateTime>("DataHoraLocalizacao")
                         .HasColumnType("TIMESTAMP(7)");
-
-                    b.Property<int>("IdImpactoClassificacao")
-                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("IdLocal")
                         .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdImpactoClassificacao");
 
                     b.HasIndex("IdLocal");
 
@@ -457,12 +455,6 @@ namespace TheGuardiansEyesData.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("TheGuardiansEyesModel.ImpactoModel", "ImpactoClassificacao")
-                        .WithMany("Desastres")
-                        .HasForeignKey("IdImpactoClassificacao")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("TheGuardiansEyesModel.LocalModel", "Local")
                         .WithMany("Desastres")
                         .HasForeignKey("IdLocal")
@@ -472,6 +464,12 @@ namespace TheGuardiansEyesData.Migrations
                     b.HasOne("TheGuardiansEyesModel.UsuarioModel", "Usuario")
                         .WithMany("Desastres")
                         .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("TheGuardiansEyesModel.ImpactoModel", "ImpactoClassificacao")
+                        .WithMany("Desastres")
+                        .HasForeignKey("Impacto")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -538,19 +536,11 @@ namespace TheGuardiansEyesData.Migrations
 
             modelBuilder.Entity("TheGuardiansEyesModel.PessoaLocalizadaModel", b =>
                 {
-                    b.HasOne("TheGuardiansEyesModel.ImpactoClassificacaoModel", "ImpactoClassificacao")
-                        .WithMany()
-                        .HasForeignKey("IdImpactoClassificacao")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TheGuardiansEyesModel.LocalModel", "Local")
                         .WithMany("PessoasLocalizadas")
                         .HasForeignKey("IdLocal")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ImpactoClassificacao");
 
                     b.Navigation("Local");
                 });

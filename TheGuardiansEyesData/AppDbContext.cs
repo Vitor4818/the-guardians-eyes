@@ -10,7 +10,7 @@ namespace TheGuardiansEyesData
 
         }
 
-        // Adicione aqui seus DbSets
+        public DbSet<PessoaLocalizadaModel> PessoasLocalizadas { get; set; }
         public DbSet<UsuarioModel> Usuarios { get; set; }
         public DbSet<DesastreModel> Desastres { get; set; }
         public DbSet<DroneModel> Drones { get; set; }
@@ -44,12 +44,12 @@ namespace TheGuardiansEyesData
             //Mantem
             modelBuilder.Entity<ImagensCapturadasModel>()
                 .HasOne(i => i.Local)
-                .WithMany(l => l.ImagensCapturadas) 
+                .WithMany(l => l.ImagensCapturadas)
                 .HasForeignKey(i => i.IdLocal);
 
             modelBuilder.Entity<ImpactoModel>()
 .HasOne(i => i.ImpactoClassificacao)
-.WithMany() // Sem coleção inversa por enquanto
+.WithMany()
 .HasForeignKey(i => i.ImpactoClassificacaoId);
 
 
@@ -76,7 +76,7 @@ namespace TheGuardiansEyesData
             modelBuilder.Entity<DesastreModel>()
             .HasOne(d => d.ImpactoClassificacao)
             .WithMany(ic => ic.Desastres)
-            .HasForeignKey(d => d.Impacto)
+            .HasForeignKey(d => d.IdImpactoClassificacao)
             .OnDelete(DeleteBehavior.Restrict);
 
 
@@ -92,33 +92,30 @@ namespace TheGuardiansEyesData
                 .WithMany(u => u.Desastres)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.Restrict);
+
+                    modelBuilder.Entity<ImagensCapturadasModel>()
+        .HasOne(imagem => imagem.Desastre)
+        .WithMany(desastre => desastre.ImagensCapturadas)
+        .HasForeignKey(imagem => imagem.IdDesastre)
+        .OnDelete(DeleteBehavior.Cascade);
+
+
+            //Configurando relação de PessoaLocalizada e local
+            modelBuilder.Entity<PessoaLocalizadaModel>()
+            .HasOne(p => p.Local)
+            .WithMany(l => l.PessoasLocalizadas)
+            .HasForeignKey(p => p.IdLocal)
+            .OnDelete(DeleteBehavior.Cascade);  
                 
-                            modelBuilder.Entity<ImagensCapturadasModel>()
-                .HasOne(imagem => imagem.   Desastre)
-                .WithMany(desastre => desastre.ImagensCapturadas)
-                .HasForeignKey(imagem => imagem.IdDesastre)
-                .OnDelete(DeleteBehavior.Cascade);  // ou Restrict, conforme sua regra de negócio
-    
+            // PessoaLocalizada → ImpactoClassificacao (1:N)
+            modelBuilder.Entity<PessoaLocalizadaModel>()
+            .HasOne(p => p.ImpactoClassificacao)
+            .WithMany()
+            .HasForeignKey(p => p.IdImpactoClassificacao);
+            
 
-//--------------------------
-
-
-
-
-
-
-
-
-
-
+//-------------------------
 
         }
-
-        
-    
-    
     }
-    
-
-    
 }
