@@ -4,14 +4,14 @@ using System.Text.Json.Serialization;
 
 public class DesastreModel
 {
-    public required int Id { get; set; }
+    public int Id { get; set; }
 
     // FK e navegação para Local
     public required int IdLocal { get; set; }
     public LocalModel? Local { get; set; }
 
     // FK e navegação para ImpactoClassificacao
-    public required int Impacto { get; set; }
+    public required int IdImpactoClassificacao { get; set; }
     public ImpactoModel? ImpactoClassificacao { get; set; }
 
     // FK e navegação para GrupoDesastre
