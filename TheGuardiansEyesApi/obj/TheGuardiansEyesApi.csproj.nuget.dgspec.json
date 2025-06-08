@@ -75,10 +75,6 @@
               "target": "Package",
               "version": "[9.0.5, )"
             },
-            "Microsoft.Extensions.Caching.Memory": {
-              "target": "Package",
-              "version": "[9.0.5, )"
-            },
             "Oracle.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.23.80, )"
