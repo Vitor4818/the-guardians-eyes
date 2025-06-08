@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TheGuardiansEyesApi.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class LocalController : ControllerBase

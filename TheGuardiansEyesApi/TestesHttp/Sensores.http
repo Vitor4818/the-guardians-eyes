@@ -1,0 +1,54 @@
+@baseUrl = http://localhost:5193
+
+### 🟢 GET - Listar todos os sensores
+GET {{baseUrl}}/api/Sensores
+Accept: application/json
+
+###
+
+### 🔵 POST - Cadastrar novo sensor
+POST {{baseUrl}}/api/Sensores
+Content-Type: application/json
+
+{
+  "chip": "CHIP12345",
+  "modelo": "ModeloX",
+  "interface": "I2C",
+  "utilidade": "Medição de Temperatura",
+  "fabricante": "FabricanteY",
+  "estado": "Ativo",
+  "saida": "Digital",
+  "tipoSaida": "PWM",
+  "mediaTensaoRegistrada": 220
+}
+
+###
+
+### 🟡 GET - Obter sensor por ID
+GET {{baseUrl}}/api/Sensores/1
+Accept: application/json
+
+###
+
+### 🟣 PUT - Atualizar sensor por ID
+PUT {{baseUrl}}/api/Sensores/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "chip": "CHIP12345",
+  "modelo": "ModeloX Pro",
+  "interface": "SPI",
+  "utilidade": "Medição de Temperatura e Umidade",
+  "fabricante": "FabricanteY",
+  "estado": "Ativo",
+  "saida": "Analógica",
+  "tipoSaida": "PWM",
+  "mediaTensaoRegistrada": 230
+}
+
+###
+
+### 🔴 DELETE - Remover sensor por ID
+DELETE {{baseUrl}}/api/Sensores/1
+Accept: application/json

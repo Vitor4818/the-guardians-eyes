@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace UsuariosApi.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
@@ -97,7 +96,6 @@ namespace UsuariosApi.Controllers
         /// <param name="usuario">Dados do usuário a ser cadastrado.</param>
         /// <returns>Usuário criado.</returns>
         [HttpPost]
-        [AllowAnonymous]  
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

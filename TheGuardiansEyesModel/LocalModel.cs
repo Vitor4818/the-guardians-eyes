@@ -15,7 +15,7 @@ public class LocalModel
     public string? Numero { get; set; }
 
     [JsonIgnore]
-    public ICollection<PessoaLocalizadaModel> PessoasLocalizadas { get; set; } = new List<PessoaLocalizadaModel>();
+    public ICollection<PessoaLocalizadaModel>? PessoasLocalizadas { get; set; } = new List<PessoaLocalizadaModel>();
 
     // Relação reversa
     [JsonIgnore]

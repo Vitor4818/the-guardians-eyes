@@ -1,0 +1,48 @@
+@baseUrl = http://localhost:5193
+
+### 🟢 GET - Listar todos os desastres
+GET {{baseUrl}}/api/Desastre
+Accept: application/json
+
+###
+
+### 🔵 POST - Cadastrar novo desastre
+POST {{baseUrl}}/api/Desastre
+Content-Type: application/json
+
+{
+  "idLocal": 1,
+  "idImpactoClassificacao":  1,
+  "idGrupoDesastre": 1,
+  "idUsuario": 1,
+  "cobrade": 123456,
+  "dataOcorrencia": "2025-06-08"
+}
+
+###
+
+### 🟡 GET - Obter desastre por ID
+GET {{baseUrl}}/api/Desastre/1
+Accept: application/json
+
+###
+
+### 🟣 PUT - Atualizar desastre por ID
+PUT {{baseUrl}}/api/Desastre/1
+Content-Type: application/json
+
+{
+  "id":1,
+  "idLocal": 1,
+  "idImpactoClassificacao": 1,
+  "idGrupoDesastre": 1,
+  "idUsuario": 1,
+  "cobrade": 654321,
+  "dataOcorrencia": "2025-06-09"
+}
+
+###
+
+### 🔴 DELETE - Remover desastre por ID
+DELETE {{baseUrl}}/api/Desastre/1
+Accept: application/json

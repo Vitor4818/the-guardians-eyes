@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:5193
+
+### 🟢 GET - Listar todos os impactos
+GET {{baseUrl}}/api/Impacto
+Accept: application/json
+
+###
+
+### 🔵 POST - Cadastrar novo impacto
+POST {{baseUrl}}/api/Impacto
+Content-Type: application/json
+
+{
+  "id":5,
+  "impactoClassificacaoId": 1
+}
+
+###
+
+### 🟡 GET - Obter impacto por ID
+GET {{baseUrl}}/api/Impacto/1
+Accept: application/json
+
+###
+
+### 🟣 PUT - Atualizar impacto por ID
+PUT {{baseUrl}}/api/Impacto/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "impactoClassificacaoId": 2
+}
+
+###
+
+### 🔴 DELETE - Remover impacto por ID
+DELETE {{baseUrl}}/api/Impacto/1
+Accept: application/json

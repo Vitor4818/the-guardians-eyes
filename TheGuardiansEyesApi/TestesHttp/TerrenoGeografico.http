@@ -1,0 +1,11 @@
+@baseUrl = http://localhost:5193
+
+### 🟢 GET - Listar todos os terrenos geográficos
+GET {{baseUrl}}/api/TerrenoGeografico
+Accept: application/json
+
+###
+
+### 🟡 GET - Obter terreno geográfico por ID
+GET {{baseUrl}}/api/TerrenoGeografico/1
+Accept: application/json
