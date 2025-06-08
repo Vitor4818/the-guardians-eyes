@@ -1,0 +1,33 @@
+@model TheGuardiansEyesMVC.Models.Responses.SubGrupoDesastreResponse
+
+@{
+    ViewData["Title"] = "Excluir SubGrupo de Desastre";
+}
+
+<h1 class="sgd-delete-title">@ViewData["Title"]</h1>
+
+<h3 class="sgd-delete-warning">Tem certeza que deseja excluir este SubGrupo?</h3>
+
+<div class="sgd-delete-container">
+    <h4 class="sgd-delete-subtitle">SubGrupo de Desastre</h4>
+    <hr class="sgd-delete-hr" />
+    <dl class="sgd-delete-list">
+        <dt class="sgd-delete-term">Id</dt>
+        <dd class="sgd-delete-desc">@Model.Id</dd>
+
+        <dt class="sgd-delete-term">Subgrupo</dt>
+        <dd class="sgd-delete-desc">@Model.Subgrupo</dd>
+
+        <dt class="sgd-delete-term">Tipo</dt>
+        <dd class="sgd-delete-desc">@Model.Tipo</dd>
+
+        <dt class="sgd-delete-term">SubTipo</dt>
+        <dd class="sgd-delete-desc">@Model.SubTipo</dd>
+    </dl>
+</div>
+
+<form asp-action="Delete" method="post" class="sgd-delete-form">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="sgd-btn-danger">Excluir</button>
+    <a asp-action="Index" class="sgd-btn-secondary">Cancelar</a>
+</form>

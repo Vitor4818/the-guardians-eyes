@@ -1,0 +1,62 @@
+@model IEnumerable<TheGuardiansEyesModel.SensoresModel>
+
+@{
+    ViewData["Title"] = "Sensores";
+}
+
+<div class="sensor-wrapper">
+    <h2 class="sensor-title">Lista de Sensores</h2>
+
+    <div class="sensor-create-container">
+        <a asp-action="Create" class="sensor-create-btn">Cadastrar Novo Sensor</a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="sensor-empty-msg">Nenhum sensor cadastrado.</div>
+    }
+    else
+    {
+        <div class="sensor-table-container">
+            <table class="sensor-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Chip</th>
+                        <th>Modelo</th>
+                        <th>Interface</th>
+                        <th>Utilidade</th>
+                        <th>Fabricante</th>
+                        <th>Estado</th>
+                        <th>Saída</th>
+                        <th>Tipo de Saída</th>
+                        <th>Média Tensão Registrada</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Chip</td>
+                            <td>@item.Modelo</td>
+                            <td>@item.Interface</td>
+                            <td>@item.Utilidade</td>
+                            <td>@item.Fabricante</td>
+                            <td>@item.Estado</td>
+                            <td>@item.Saida</td>
+                            <td>@item.TipoSaida</td>
+                            <td>@item.MediaTensaoRegistrada</td>
+                            <td class="sensor-actions">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="sensor-edit">Editar</a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="sensor-details">Detalhes</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="sensor-delete">Excluir</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

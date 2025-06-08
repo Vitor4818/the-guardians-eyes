@@ -1,0 +1,34 @@
+@model List<TheGuardiansEyesMVC.Models.Responses.TerrenoGeograficoResponse>
+
+@{
+    ViewData["Title"] = "Terrenos Geográficos";
+}
+
+<div class="custom-terreno-container">
+    <h2 class="custom-terreno-title">Terrenos Geográficos Cadastrados</h2>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="custom-alert-info">Nenhum terreno encontrado.</div>
+    }
+    else
+    {
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome do Terreno</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var terreno in Model)
+                {
+                    <tr>
+                        <td>@terreno.Id</td>
+                        <td>@terreno.NomeTerreno</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

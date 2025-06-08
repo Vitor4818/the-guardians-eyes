@@ -1,0 +1,158 @@
+/* ===== Container da página de terrenos ===== */
+.custom-terreno-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    margin-top: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Título da seção ===== */
+.custom-terreno-title {
+    font-size: 1.8rem;
+    color: #1f3d3a;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+/* ===== Alerta de nenhum registro ===== */
+.custom-alert-info {
+    background-color: #e0f7fa;
+    color: #006064;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* ===== Tabela ===== */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.custom-table th,
+.custom-table td {
+    padding: 0.9rem 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.custom-table th {
+    background-color: #2a9d8f;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+}
+
+.custom-table tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+}
+
+
+/* Título */
+.sgd-edit-title {
+    font-size: 2rem;
+    color: #1f3d3a;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+/* Summary Validation */
+.sgd-validation-summary {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+/* Form Container */
+.sgd-edit-form {
+    max-width: 480px;
+    background-color: #f9fcfb;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Group Label + Input */
+.sgd-edit-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25rem;
+}
+
+.sgd-edit-label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: #1f3d3a;
+    font-size: 1rem;
+}
+
+/* Inputs */
+.sgd-edit-input {
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+}
+
+.sgd-edit-input:focus {
+    outline: none;
+    border-color: #2a9d8f;
+    box-shadow: 0 0 6px #2a9d8faa;
+}
+
+/* Validation Error */
+.sgd-validation-error {
+    color: #d9534f;
+    margin-top: 0.3rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Botões */
+.sgd-edit-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.sgd-btn-submit {
+    background-color: #2a9d8f;
+    color: white;
+    padding: 0.6rem 1.5rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sgd-btn-submit:hover {
+    background-color: #21867a;
+}
+
+.sgd-btn-cancel {
+    background-color: #888;
+    color: white;
+    padding: 0.6rem 1.5rem;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.sgd-btn-cancel:hover {
+    background-color: #666;
+}

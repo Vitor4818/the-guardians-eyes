@@ -1,0 +1,61 @@
+@model TheGuardiansEyesModel.DesastreModel
+
+<h1 class="sgd-edit-title">Editar Desastre</h1>
+
+<div asp-validation-summary="ModelOnly" class="sgd-validation-summary">
+    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+    {
+        <p>@error.ErrorMessage</p>
+    }
+</div>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post" class="sgd-edit-form">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="sgd-edit-group">
+        <label asp-for="IdLocal" class="sgd-edit-label"></label>
+        <input asp-for="IdLocal" class="sgd-edit-input" />
+        <span asp-validation-for="IdLocal" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-edit-group">
+        <label asp-for="IdImpactoClassificacao" class="sgd-edit-label"></label>
+        <input asp-for="IdImpactoClassificacao" class="sgd-edit-input" />
+        <span asp-validation-for="IdImpactoClassificacao" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-edit-group">
+        <label asp-for="IdGrupoDesastre" class="sgd-edit-label"></label>
+        <input asp-for="IdGrupoDesastre" class="sgd-edit-input" />
+        <span asp-validation-for="IdGrupoDesastre" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-edit-group">
+        <label asp-for="IdUsuario" class="sgd-edit-label"></label>
+        <input asp-for="IdUsuario" class="sgd-edit-input" />
+        <span asp-validation-for="IdUsuario" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-edit-group">
+        <label asp-for="Cobrade" class="sgd-edit-label"></label>
+        <input asp-for="Cobrade" class="sgd-edit-input" />
+        <span asp-validation-for="Cobrade" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-edit-group">
+        <label asp-for="DataOcorrencia" class="sgd-edit-label"></label>
+        <input asp-for="DataOcorrencia" class="sgd-edit-input" />
+        <span asp-validation-for="DataOcorrencia" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-edit-buttons">
+        <button type="submit" class="sgd-btn-submit">Salvar</button>
+        <a asp-action="Index" class="sgd-btn-cancel">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

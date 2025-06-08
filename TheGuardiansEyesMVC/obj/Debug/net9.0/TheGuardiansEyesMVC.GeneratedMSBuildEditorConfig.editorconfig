@@ -1,0 +1,169 @@
+is_global = true
+build_property.TargetFramework = net9.0
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = TheGuardiansEyesMVC
+build_property.RootNamespace = TheGuardiansEyesMVC
+build_property.ProjectDir = C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesMVC\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesMVC
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Desastre/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzYXN0cmVcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Desastre/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzYXN0cmVcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Desastre/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzYXN0cmVcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Desastre/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzYXN0cmVcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Desastre/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzYXN0cmVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Drone/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHJvbmVcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Drone/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHJvbmVcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Drone/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHJvbmVcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Drone/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHJvbmVcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Drone/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHJvbmVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/GrupoDesastre/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3J1cG9EZXNhc3RyZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/GrupoDesastre/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3J1cG9EZXNhc3RyZVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/GrupoDesastre/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3J1cG9EZXNhc3RyZVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/GrupoDesastre/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3J1cG9EZXNhc3RyZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Sensores/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Vuc29yZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Sensores/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Vuc29yZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Sensores/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Vuc29yZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Sensores/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Vuc29yZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Sensores/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Vuc29yZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/SubGrupoDesastre/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViR3J1cG9EZXNhc3RyZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/SubGrupoDesastre/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViR3J1cG9EZXNhc3RyZVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/SubGrupoDesastre/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViR3J1cG9EZXNhc3RyZVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/SubGrupoDesastre/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViR3J1cG9EZXNhc3RyZVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/SubGrupoDesastre/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViR3J1cG9EZXNhc3RyZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/TerrenoGeografico/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVycmVub0dlb2dyYWZpY29caW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Usuario/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Usuario/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Usuario/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vitor/Documents/.NET fiap/the-angel-eyes/TheGuardiansEyesMVC/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-6flrvmtusa

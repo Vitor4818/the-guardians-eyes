@@ -1,0 +1,57 @@
+@model IEnumerable<TheGuardiansEyesModel.DroneModel>
+
+@{
+    ViewData["Title"] = "Lista de Drones";
+    var temDrones = Model != null && Model.Any();
+}
+
+<h1 class="sgd-title">@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create" class="sgd-create-btn">Cadastrar Novo Drone</a>
+</p>
+
+@if (temDrones)
+{
+    <table class="sgd-table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fabricante</th>
+                <th>Modelo</th>
+                <th>Tempo de Voo</th>
+                <th>Distância Máxima (m)</th>
+                <th>Velocidade Máxima (km/h)</th>
+                <th>Câmera</th>
+                <th>Peso (g)</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var drone in Model!)
+            {
+                <tr>
+                    <td>@drone.Id</td>
+                    <td>@drone.Fabricante</td>
+                    <td>@drone.Modelo</td>
+                    <td>@drone.TempoVoo</td>
+                    <td>@drone.DistanciaMaxima</td>
+                    <td>@drone.VelocidadeMaxima</td>
+                    <td>@drone.Camera</td>
+                    <td>@drone.Peso</td>
+                    <td class="sgd-actions">
+                        <a asp-action="Edit" asp-route-id="@drone.Id" class="sgd-link">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@drone.Id" class="sgd-link">Detalhes</a> |
+                        <a asp-action="Delete" asp-route-id="@drone.Id" class="sgd-link sgd-delete-link">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="sgd-alert-warning">
+        Nenhum drone cadastrado ainda.
+    </div>
+}

@@ -1,0 +1,36 @@
+@model TheGuardiansEyesModel.SensoresModel
+
+@{
+    ViewData["Title"] = "Excluir Sensor";
+}
+
+<h1 class="sgd-delete-title">@ViewData["Title"]</h1>
+
+<h3 class="sgd-delete-warning">Tem certeza que deseja excluir este sensor?</h3>
+
+<div class="sgd-delete-container">
+    <h4 class="sgd-delete-subtitle">Dados do Sensor</h4>
+    <hr class="sgd-delete-hr" />
+    <dl class="sgd-delete-list">
+        <dt class="sgd-delete-term">Chip</dt>
+        <dd class="sgd-delete-desc">@Model.Chip</dd>
+
+        <dt class="sgd-delete-term">Modelo</dt>
+        <dd class="sgd-delete-desc">@Model.Modelo</dd>
+
+        <dt class="sgd-delete-term">Fabricante</dt>
+        <dd class="sgd-delete-desc">@Model.Fabricante</dd>
+
+        <dt class="sgd-delete-term">Utilidade</dt>
+        <dd class="sgd-delete-desc">@Model.Utilidade</dd>
+
+        <dt class="sgd-delete-term">Estado</dt>
+        <dd class="sgd-delete-desc">@Model.Estado</dd>
+    </dl>
+</div>
+
+<form asp-action="Delete" method="post" class="sgd-delete-form">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="sgd-btn-danger">Excluir</button>
+    <a asp-action="Index" class="sgd-btn-secondary">Cancelar</a>
+</form>

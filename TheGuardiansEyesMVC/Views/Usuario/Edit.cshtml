@@ -1,0 +1,35 @@
+@using TheGuardiansEyesModel;
+@model UsuarioModel
+
+@{
+    ViewData["Title"] = "Editar Usuário";
+}
+
+<h1 class="sgd-edit-title">@ViewData["Title"]</h1>
+
+<div asp-validation-summary="ModelOnly" class="sgd-validation-summary"></div>
+
+<form asp-action="Edit" method="post" class="sgd-edit-form">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="sgd-edit-group">
+        <label asp-for="Nome" class="sgd-edit-label"></label>
+        <input asp-for="Nome" class="sgd-edit-input" />
+        <span asp-validation-for="Nome" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-edit-group">
+        <label asp-for="Email" class="sgd-edit-label"></label>
+        <input asp-for="Email" class="sgd-edit-input" />
+        <span asp-validation-for="Email" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-edit-buttons">
+        <button type="submit" class="sgd-btn-submit">Atualizar</button>
+        <a asp-action="Index" class="sgd-btn-cancel">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

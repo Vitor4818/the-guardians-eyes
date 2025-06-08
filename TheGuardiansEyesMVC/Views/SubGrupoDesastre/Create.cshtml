@@ -1,0 +1,44 @@
+@model TheGuardiansEyesMVC.Models.Requests.SubGrupoDesastreRequest
+
+@{
+    ViewData["Title"] = "Criar SubGrupo de Desastre";
+}
+
+<h1 class="sgd-create-title">@ViewData["Title"]</h1>
+
+@Html.ValidationSummary(true, "", new { @class = "sgd-validation-summary" })
+
+<form asp-action="Create" method="post" class="sgd-create-form">
+    <div class="sgd-form-group">
+        <label asp-for="Subgrupo" class="sgd-label"></label>
+        <input asp-for="Subgrupo" class="sgd-input" />
+        <span asp-validation-for="Subgrupo" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-form-group">
+        <label asp-for="Tipo" class="sgd-label"></label>
+        <input asp-for="Tipo" class="sgd-input" />
+        <span asp-validation-for="Tipo" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-form-group">
+        <label asp-for="SubTipo" class="sgd-label"></label>
+        <input asp-for="SubTipo" class="sgd-input" />
+        <span asp-validation-for="SubTipo" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-form-group">
+        <label asp-for="GrupoDesastreId" class="sgd-label"></label>
+        <input asp-for="GrupoDesastreId" class="sgd-input" />
+        <span asp-validation-for="GrupoDesastreId" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-form-buttons">
+        <button type="submit" class="sgd-btn-success">Salvar</button>
+        <a asp-action="Index" class="sgd-btn-secondary">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

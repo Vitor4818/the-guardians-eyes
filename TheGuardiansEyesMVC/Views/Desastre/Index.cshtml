@@ -1,0 +1,54 @@
+@model IEnumerable<TheGuardiansEyesModel.DesastreModel>
+
+@{
+    ViewData["Title"] = "Lista de Desastres";
+}
+
+<h1 class="sgd-title">@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create" class="sgd-create-btn">Criar Novo</a>
+</p>
+
+@if (Model != null && Model.Any())
+{
+    <table class="sgd-table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Id Local</th>
+                <th>Impacto</th>
+                <th>Id Grupo Desastre</th>
+                <th>Id Usuário</th>
+                <th>Cobrade</th>
+                <th>Data Ocorrência</th>
+                <th class="sgd-actions">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.IdLocal</td>
+                    <td>@item.IdImpactoClassificacao</td>
+                    <td>@item.IdGrupoDesastre</td>
+                    <td>@item.IdUsuario</td>
+                    <td>@item.Cobrade</td>
+                    <td>@item.DataOcorrencia</td>
+                    <td class="sgd-actions">
+                        <a asp-action="Details" asp-route-id="@item.Id" class="sgd-link">Detalhes</a> |
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="sgd-link">Editar</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="sgd-link sgd-delete-link">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="sgd-alert-warning">
+        Nenhum desastre cadastrado até o momento.
+    </div>
+}
