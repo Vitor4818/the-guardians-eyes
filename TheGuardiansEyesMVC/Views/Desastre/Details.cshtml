@@ -1,0 +1,39 @@
+@model TheGuardiansEyesModel.DesastreModel
+
+@{
+    ViewData["Title"] = "Detalhes do Desastre";
+}
+
+<h1 class="sgd-details-title">@ViewData["Title"]</h1>
+
+<div class="sgd-details-container">
+    <h4 class="sgd-details-subtitle">Desastre</h4>
+    <hr class="sgd-details-hr" />
+    <dl class="sgd-details-list">
+        <dt class="sgd-details-term">Id</dt>
+        <dd class="sgd-details-desc">@Model.Id</dd>
+
+        <dt class="sgd-details-term">Id Local</dt>
+        <dd class="sgd-details-desc">@Model.IdLocal</dd>
+
+        <dt class="sgd-details-term">Impacto</dt>
+        <dd class="sgd-details-desc">@Model.IdImpactoClassificacao</dd>
+
+        <dt class="sgd-details-term">Grupo Desastre</dt>
+        <dd class="sgd-details-desc">@Model.IdGrupoDesastre</dd>
+
+        <dt class="sgd-details-term">Usuário</dt>
+        <dd class="sgd-details-desc">@Model.IdUsuario</dd>
+
+        <dt class="sgd-details-term">Cobrade</dt>
+        <dd class="sgd-details-desc">@Model.Cobrade</dd>
+
+        <dt class="sgd-details-term">Data Ocorrência</dt>
+        <dd class="sgd-details-desc">@Model.DataOcorrencia</dd>
+    </dl>
+</div>
+
+<p class="sgd-details-actions">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="sgd-btn-warning">Editar</a> |
+    <a asp-action="Index" class="sgd-btn-secondary">Voltar para Lista</a>
+</p>

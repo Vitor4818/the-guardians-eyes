@@ -1,0 +1,11 @@
+@baseUrl = http://localhost:5193
+
+### 🟢 GET - Listar todas as classificações de impacto
+GET {{baseUrl}}/api/ImpactoClassificacao
+Accept: application/json
+
+###
+
+### 🟡 GET - Obter classificação de impacto por ID
+GET {{baseUrl}}/api/ImpactoClassificacao/1
+Accept: application/json

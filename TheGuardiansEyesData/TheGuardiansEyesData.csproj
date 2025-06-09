@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TheGuardiansEyesModel\TheGuardiansEyesModel.csproj" />
-    <ProjectReference Include="..\TheGuardiansEyesBusiness\TheGuardiansEyesBusiness.csproj" />
   </ItemGroup>
 
   <ItemGroup>

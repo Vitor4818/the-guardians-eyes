@@ -1,0 +1,45 @@
+@model List<TheGuardiansEyesModel.GrupoDesastreModel>
+
+@{
+    ViewData["Title"] = "Grupos de Desastre";
+}
+
+<h1 class="sgd-title">@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create" class="sgd-create-btn">Criar Novo Grupo</a>
+</p>
+
+@if (Model != null && Model.Any())
+{
+    <!-- Se o model tiver itens, mostra a tabela -->
+    <table class="sgd-table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome do Grupo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var grupo in Model)
+            {
+                <tr>
+                    <td>@grupo.Id</td>
+                    <td>@grupo.NomeGrupo</td>
+                    <td class="sgd-actions">
+                        <a asp-action="Edit" asp-route-id="@grupo.Id" class="sgd-link">Editar</a> |
+                        <a asp-action="Delete" asp-route-id="@grupo.Id" class="sgd-link sgd-delete-link">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <!-- Se o model for nulo ou vazio, mostra mensagem -->
+    <div class="sgd-alert-warning">
+        Nenhum grupo de desastre cadastrado no momento.
+    </div>
+}

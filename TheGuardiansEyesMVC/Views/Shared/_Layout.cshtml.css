@@ -1,0 +1,52 @@
+﻿/* Corpo da página em flex vertical */
+body {
+    margin: 0;
+    height: 100vh;          /* altura total da viewport */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main ocupa o espaço disponível para empurrar footer para baixo */
+main {
+    flex-grow: 1;
+}
+
+/* Header */
+header .navbar {
+    background-color: #1f3d3a !important; /* verde escuro */
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    height: 7rem;
+}
+
+header .navbar-brand,
+header .nav-link {
+    color: #ffffff !important; /* verde claro */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header .nav-link:hover,
+header .navbar-brand:hover {
+    color: #9ae4b3 !important;
+}
+
+/* Footer fixado no fim */
+footer {
+    background-color: #1f3d3a;
+    color: #d4f4dd;
+    padding: 1rem 0;
+    text-align: center;
+    margin-top: auto;  /* empurra o footer para baixo */
+}
+
+footer a {
+    color: #9ae4b3;
+    text-decoration: underline;
+}
+
+footer a:hover {
+    color: #75c69d;
+}

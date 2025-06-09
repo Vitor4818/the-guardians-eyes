@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:5193
+
+### 🟢 GET - Listar todos os grupos de desastres
+GET {{baseUrl}}/api/GrupoDesastre
+Accept: application/json
+
+###
+
+### 🔵 POST - Cadastrar novo grupo de desastre
+POST {{baseUrl}}/api/GrupoDesastre
+Content-Type: application/json
+
+{
+  "id": 1,
+  "nomeGrupo": "Grupo de Incêndios Florestais"
+}
+
+###
+
+### 🟡 GET - Obter grupo de desastre por ID
+GET {{baseUrl}}/api/GrupoDesastre/1
+Accept: application/json
+
+###
+
+### 🟣 PUT - Atualizar grupo de desastre por ID
+PUT {{baseUrl}}/api/GrupoDesastre/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "nomeGrupo": "Grupo de Enchentes"
+}
+
+###
+
+### 🔴 DELETE - Remover grupo de desastre por ID
+DELETE {{baseUrl}}/api/GrupoDesastre/1
+Accept: application/json

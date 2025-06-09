@@ -1,8 +1,11 @@
 C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\bin\Debug\net9.0\TheGuardiansEyesBusiness.deps.json
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\bin\Debug\net9.0\TheGuardiansEyesBusiness.runtimeconfig.json
 C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\bin\Debug\net9.0\TheGuardiansEyesBusiness.dll
 C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\bin\Debug\net9.0\TheGuardiansEyesBusiness.pdb
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\bin\Debug\net9.0\TheGuardiansEyesData.dll
 C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\bin\Debug\net9.0\TheGuardiansEyesModel.dll
 C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\bin\Debug\net9.0\TheGuardiansEyesModel.pdb
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\bin\Debug\net9.0\TheGuardiansEyesData.pdb
 C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\obj\Debug\net9.0\TheGuardiansEyesBusiness.csproj.AssemblyReference.cache
 C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\obj\Debug\net9.0\TheGuardiansEyesBusiness.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\obj\Debug\net9.0\TheGuardiansEyesBusiness.AssemblyInfoInputs.cache
@@ -13,4 +16,5 @@ C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\obj\D
 C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\obj\Debug\net9.0\TheGuardiansEyesBusiness.dll
 C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\obj\Debug\net9.0\refint\TheGuardiansEyesBusiness.dll
 C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\obj\Debug\net9.0\TheGuardiansEyesBusiness.pdb
+C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\obj\Debug\net9.0\TheGuardiansEyesBusiness.genruntimeconfig.cache
 C:\Users\vitor\Documents\.NET fiap\the-angel-eyes\TheGuardiansEyesBusiness\obj\Debug\net9.0\ref\TheGuardiansEyesBusiness.dll

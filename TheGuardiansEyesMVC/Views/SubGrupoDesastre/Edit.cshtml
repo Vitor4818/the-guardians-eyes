@@ -1,0 +1,46 @@
+@model TheGuardiansEyesMVC.Models.Requests.SubGrupoDesastreRequest
+
+@{
+    ViewData["Title"] = "Editar SubGrupo de Desastre";
+}
+
+<h1 class="sgd-edit-title">@ViewData["Title"]</h1>
+
+<div asp-validation-summary="ModelOnly" class="sgd-validation-summary"></div>
+
+<form asp-action="Edit" method="post" class="sgd-edit-form">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="sgd-edit-group">
+        <label asp-for="Subgrupo" class="sgd-edit-label"></label>
+        <input asp-for="Subgrupo" class="sgd-edit-input" />
+        <span asp-validation-for="Subgrupo" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-edit-group">
+        <label asp-for="Tipo" class="sgd-edit-label"></label>
+        <input asp-for="Tipo" class="sgd-edit-input" />
+        <span asp-validation-for="Tipo" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-edit-group">
+        <label asp-for="SubTipo" class="sgd-edit-label"></label>
+        <input asp-for="SubTipo" class="sgd-edit-input" />
+        <span asp-validation-for="SubTipo" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-edit-group">
+        <label asp-for="GrupoDesastreId" class="sgd-edit-label"></label>
+        <input asp-for="GrupoDesastreId" class="sgd-edit-input" />
+        <span asp-validation-for="GrupoDesastreId" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-edit-buttons">
+        <button type="submit" class="sgd-btn-submit">Atualizar</button>
+        <a asp-action="Index" class="sgd-btn-cancel">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,47 @@
+@baseUrl = http://localhost:5193
+
+### 🟢 GET - Listar todas as imagens capturadas
+GET {{baseUrl}}/api/ImagensCapturadas
+Accept: application/json
+
+###
+
+### 🔵 POST - Cadastrar nova imagem capturada
+POST {{baseUrl}}/api/ImagensCapturadas
+Content-Type: application/json
+
+{
+  "id":1,
+  "hospedagem": "https://www.infomoney.com.br/wp-content/uploads/2024/09/2024-09-17T223006Z_1_LYNXMPEK8G0SK_RTROPTP_4_BRAZIL-WILDFIRES-1.jpg?fit=1280%2C853&quality=50&strip=all",
+  "tamanho": "1024x768",
+  "idLocal": 1,
+  "idDrone": 1
+}
+
+###
+
+### 🟡 GET - Obter imagem capturada por ID
+GET {{baseUrl}}/api/ImagensCapturadas/1
+Accept: application/json
+
+###
+
+### 🟣 PUT - Atualizar imagem capturada por ID
+PUT {{baseUrl}}/api/ImagensCapturadas/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "hospedagem": "https://www.infomoney.com.br/wp-content/uploads/2024/09/2024-09-17T223006Z_1_LYNXMPEK8G0SK_RTROPTP_4_BRAZIL-WILDFIRES-1.jpg?fit=1280%2C853&quality=50&strip=all",
+  "tamanho": "1920x1080",
+  "idLocal": 1,
+  "idImpactoClassificacao": 1,
+  "idDrone": 1,
+  "idDesastre": 1
+}
+
+###
+
+### 🔴 DELETE - Remover imagem capturada por ID
+DELETE {{baseUrl}}/api/ImagensCapturadas/1
+Accept: application/json

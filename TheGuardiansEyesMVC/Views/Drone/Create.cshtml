@@ -1,0 +1,56 @@
+@model TheGuardiansEyesModel.DroneModel
+
+@{
+    ViewData["Title"] = "Cadastrar Drone";
+}
+
+<h1 class="sgd-create-title">@ViewData["Title"]</h1>
+
+@Html.ValidationSummary(true, "", new { @class = "sgd-validation-summary" })
+
+<form asp-action="Create" method="post" class="sgd-create-form">
+    <div class="sgd-form-group">
+        <label asp-for="Fabricante" class="sgd-label"></label>
+        <input asp-for="Fabricante" class="sgd-input" />
+        <span asp-validation-for="Fabricante" class="sgd-validation-error"></span>
+    </div>
+    <div class="sgd-form-group">
+        <label asp-for="Modelo" class="sgd-label"></label>
+        <input asp-for="Modelo" class="sgd-input" />
+        <span asp-validation-for="Modelo" class="sgd-validation-error"></span>
+    </div>
+    <div class="sgd-form-group">
+        <label asp-for="TempoVoo" class="sgd-label"></label>
+        <input asp-for="TempoVoo" class="sgd-input" />
+        <span asp-validation-for="TempoVoo" class="sgd-validation-error"></span>
+    </div>
+    <div class="sgd-form-group">
+        <label asp-for="DistanciaMaxima" class="sgd-label"></label>
+        <input asp-for="DistanciaMaxima" class="sgd-input" />
+        <span asp-validation-for="DistanciaMaxima" class="sgd-validation-error"></span>
+    </div>
+    <div class="sgd-form-group">
+        <label asp-for="VelocidadeMaxima" class="sgd-label"></label>
+        <input asp-for="VelocidadeMaxima" class="sgd-input" />
+        <span asp-validation-for="VelocidadeMaxima" class="sgd-validation-error"></span>
+    </div>
+    <div class="sgd-form-group">
+        <label asp-for="Camera" class="sgd-label"></label>
+        <input asp-for="Camera" class="sgd-input" />
+        <span asp-validation-for="Camera" class="sgd-validation-error"></span>
+    </div>
+    <div class="sgd-form-group">
+        <label asp-for="Peso" class="sgd-label"></label>
+        <input asp-for="Peso" class="sgd-input" />
+        <span asp-validation-for="Peso" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-form-buttons">
+        <button type="submit" class="sgd-btn-success">Salvar</button>
+        <a asp-action="Index" class="sgd-btn-secondary">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,11 @@
+@baseUrl = http://localhost:5193
+
+### 🟢 GET - Listar todas as pessoas localizadas
+GET {{baseUrl}}/api/PessoaLocalizada
+Accept: application/json
+
+###
+
+### 🟡 GET - Obter pessoa localizada pelas ultimas 48h
+GET {{baseUrl}}/api/PessoaLocalizada/ultimas-48h
+Accept: application/json

@@ -1,0 +1,374 @@
+/* Container geral e título */
+.sgd-title {
+    font-size: 2rem;
+    color: #1f3d3a;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+/* Botão criar novo */
+.sgd-create-btn {
+    display: inline-block;
+    background-color: #2a9d8f;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.sgd-create-btn:hover {
+    background-color: #21867a;
+}
+
+/* Tabela */
+.sgd-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+.sgd-table thead {
+    background-color: #1f3d3a;
+    color: #fff;
+}
+
+.sgd-table th,
+.sgd-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.sgd-table tr:nth-child(even) {
+    background-color: #f4f6f9;
+}
+
+
+/* Ações links */
+.sgd-actions a {
+    color: #2a9d8f;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 4px;
+    transition: color 0.3s ease;
+}
+
+.sgd-actions a:hover {
+    color: #21867a;
+}
+
+/* Link excluir */
+.sgd-delete-link {
+    color: #d9534f;
+}
+
+.sgd-delete-link:hover {
+    color: #c9302c;
+}
+
+/* Alerta de nenhum registro */
+.sgd-alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Título principal */
+.sgd-details-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f3d3a;
+    margin-bottom: 1rem;
+}
+
+/* Container do detalhe */
+.sgd-details-container {
+    background-color: #f9fcfb;
+    padding: 1.8rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+
+/* Subtítulo */
+.sgd-details-subtitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2a9d8f;
+    margin-bottom: 0.5rem;
+}
+
+/* Linha horizontal */
+.sgd-details-hr {
+    border: 0;
+    height: 1px;
+    background: #2a9d8f;
+    opacity: 0.4;
+    margin-bottom: 1.5rem;
+}
+
+/* Lista de detalhes (dl) */
+.sgd-details-list {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    row-gap: 0.8rem;
+    column-gap: 1.5rem;
+}
+
+/* Termos (dt) */
+.sgd-details-term {
+    font-weight: 700;
+    color: #1f3d3a;
+}
+
+/* Descrições (dd) */
+.sgd-details-desc {
+    color: #444;
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Container dos botões */
+.sgd-details-actions {
+    font-size: 1rem;
+}
+
+/* Botão editar estilo warning */
+.sgd-btn-warning {
+    background-color: #f4a261;
+    color: white;
+    padding: 0.5rem 1.3rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.sgd-btn-warning:hover {
+    background-color: #d48844;
+}
+
+/* Botão secundário */
+.sgd-btn-secondary {
+    background-color: #888;
+    color: white;
+    padding: 0.5rem 1.3rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-left: 0.8rem;
+}
+
+.sgd-btn-secondary:hover {
+    background-color: #666;
+}
+
+
+/* Título principal */
+.sgd-delete-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #9b2226;
+    margin-bottom: 1rem;
+}
+
+/* Texto de aviso */
+.sgd-delete-warning {
+    font-size: 1.2rem;
+    color: #bb3e03;
+    margin-bottom: 1.5rem;
+}
+
+/* Container dos detalhes */
+.sgd-delete-container {
+    background-color: #fff5f5;
+    padding: 1.8rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(155, 34, 38, 0.2);
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+
+/* Subtítulo */
+.sgd-delete-subtitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #9b2226;
+    margin-bottom: 0.5rem;
+}
+
+/* Linha horizontal */
+.sgd-delete-hr {
+    border: 0;
+    height: 1px;
+    background: #9b2226;
+    opacity: 0.5;
+    margin-bottom: 1.5rem;
+}
+
+/* Lista de detalhes (dl) com grid */
+.sgd-delete-list {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    row-gap: 0.8rem;
+    column-gap: 1.5rem;
+}
+
+/* Termos (dt) */
+.sgd-delete-term {
+    font-weight: 700;
+    color: #7f1d1d;
+}
+
+/* Descrições (dd) */
+.sgd-delete-desc {
+    color: #552222;
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Form container */
+.sgd-delete-form {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Botão excluir vermelho */
+.sgd-btn-danger {
+    background-color: #9b2226;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sgd-btn-danger:hover {
+    background-color: #7f1d1d;
+}
+
+/* Botão cancelar cinza */
+.sgd-btn-secondary {
+    background-color: #888;
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.sgd-btn-secondary:hover {
+    background-color: #666;
+}
+
+
+/* Título do formulário */
+.sgd-create-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2a7a2a;
+    margin-bottom: 1.5rem;
+}
+
+/* Sumário de validação */
+.sgd-validation-summary {
+    background-color: #f8d7da;
+    color: #842029;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #f5c2c7;
+}
+
+/* Grupo de campo */
+.sgd-form-group {
+    margin-bottom: 1.4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label */
+.sgd-label {
+    font-weight: 600;
+    color: #2a7a2a;
+    margin-bottom: 0.5rem;
+}
+
+/* Input */
+.sgd-input {
+    padding: 0.6rem 0.9rem;
+    border: 2px solid #a4d4a4;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.sgd-input:focus {
+    outline: none;
+    border-color: #2a7a2a;
+    box-shadow: 0 0 8px rgba(42, 122, 42, 0.3);
+}
+
+/* Mensagens de erro */
+.sgd-validation-error {
+    color: #bb2528;
+    font-size: 0.875rem;
+    margin-top: 0.3rem;
+}
+
+/* Botões container */
+.sgd-form-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Botão salvar (verde) */
+.sgd-btn-success {
+    background-color: #2a7a2a;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.8rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sgd-btn-success:hover {
+    background-color: #1e541e;
+}
+
+/* Botão cancelar (cinza) */
+.sgd-btn-secondary {
+    background-color: #777;
+    color: white;
+    padding: 0.7rem 1.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.sgd-btn-secondary:hover {
+    background-color: #555;
+}
+

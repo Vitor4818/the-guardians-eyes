@@ -1,0 +1,31 @@
+@model TheGuardiansEyesModel.GrupoDesastreModel
+
+@{
+    ViewData["Title"] = "Excluir Grupo de Desastre";
+}
+
+<h1 class="sgd-delete-title">@ViewData["Title"]</h1>
+
+@if (ViewBag.Erro != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Erro
+    </div>
+}
+
+<h3 class="sgd-delete-warning">Tem certeza que deseja excluir este grupo?</h3>
+
+<div class="sgd-delete-container">
+    <h4 class="sgd-delete-subtitle">Grupo de Desastre</h4>
+    <hr class="sgd-delete-hr" />
+    <dl class="sgd-delete-list">
+        <dt class="sgd-delete-term">Nome do Grupo</dt>
+        <dd class="sgd-delete-desc">@Model.NomeGrupo</dd>
+    </dl>
+</div>
+
+<form asp-action="Delete" method="post" class="sgd-delete-form">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="sgd-btn-danger">Confirmar Exclusão</button>
+    <a asp-action="Index" class="sgd-btn-secondary">Cancelar</a>
+</form>

@@ -61,6 +61,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.2, )"
@@ -74,6 +78,14 @@
             "Oracle.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.23.80, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[8.1.2, )"
+            },
+            "Swashbuckle.AspNetCore.Annotations": {
+              "target": "Package",
+              "version": "[8.1.2, )"
             }
           },
           "imports": [
@@ -128,6 +140,9 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+              "C:\\Users\\vitor\\Documents\\.NET fiap\\the-angel-eyes\\TheGuardiansEyesData\\TheGuardiansEyesData.csproj": {
+                "projectPath": "C:\\Users\\vitor\\Documents\\.NET fiap\\the-angel-eyes\\TheGuardiansEyesData\\TheGuardiansEyesData.csproj"
+              },
               "C:\\Users\\vitor\\Documents\\.NET fiap\\the-angel-eyes\\TheGuardiansEyesModel\\TheGuardiansEyesModel.csproj": {
                 "projectPath": "C:\\Users\\vitor\\Documents\\.NET fiap\\the-angel-eyes\\TheGuardiansEyesModel\\TheGuardiansEyesModel.csproj"
               }
@@ -149,6 +164,22 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.5, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -198,9 +229,6 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\vitor\\Documents\\.NET fiap\\the-angel-eyes\\TheGuardiansEyesBusiness\\TheGuardiansEyesBusiness.csproj": {
-                "projectPath": "C:\\Users\\vitor\\Documents\\.NET fiap\\the-angel-eyes\\TheGuardiansEyesBusiness\\TheGuardiansEyesBusiness.csproj"
-              },
               "C:\\Users\\vitor\\Documents\\.NET fiap\\the-angel-eyes\\TheGuardiansEyesModel\\TheGuardiansEyesModel.csproj": {
                 "projectPath": "C:\\Users\\vitor\\Documents\\.NET fiap\\the-angel-eyes\\TheGuardiansEyesModel\\TheGuardiansEyesModel.csproj"
               }

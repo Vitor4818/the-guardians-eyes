@@ -1,0 +1,59 @@
+@using TheGuardiansEyesModel;
+@model List<TheGuardiansEyesModel.UsuarioModel>
+
+@{
+    ViewData["Title"] = "Lista de Usuários";
+}
+
+<h1 class="sgd-title">@ViewData["Title"]</h1>
+
+@if (TempData["Erro"] != null)
+{
+    <div class="sgd-alert-warning">
+        @TempData["Erro"]
+    </div>
+}
+
+@if (Model == null || !Model.Any())
+{
+    <p>
+        <a asp-action="Create" class="sgd-create-btn">Criar Novo Usuário</a>
+    </p>
+    <div class="sgd-alert-warning">
+        Não há usuários cadastrados no momento.
+    </div>
+
+}
+else
+{
+    <p>
+        <a asp-action="Create" class="sgd-create-btn">Criar Novo Usuário</a>
+    </p>
+
+    <table class="sgd-table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var usuario in Model)
+            {
+                <tr>
+                    <td>@usuario.Id</td>
+                    <td>@usuario.Nome</td>
+                    <td>@usuario.Email</td>
+                    <td class="sgd-actions">
+                        <a asp-action="Edit" asp-route-id="@usuario.Id" class="sgd-link">Editar</a> |
+                        <form asp-action="Delete" asp-route-id="@usuario.Id" method="post" style="display:inline" onsubmit="return confirm('Confirma exclusão?');">
+                            <button type="submit" class="sgd-link sgd-delete-link" style="background:none;border:none;padding:0;">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

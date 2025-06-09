@@ -1,0 +1,26 @@
+@model TheGuardiansEyesModel.GrupoDesastreModel
+
+@{
+    ViewData["Title"] = "Criar Grupo de Desastre";
+}
+
+<h1 class="sgd-create-title">@ViewData["Title"]</h1>
+
+@Html.ValidationSummary(true, "", new { @class = "sgd-validation-summary" })
+
+<form asp-action="Create" method="post" class="sgd-create-form">
+    <div class="sgd-form-group">
+        <label asp-for="NomeGrupo" class="sgd-label"></label>
+        <input asp-for="NomeGrupo" class="sgd-input" />
+        <span asp-validation-for="NomeGrupo" class="sgd-validation-error"></span>
+    </div>
+
+    <div class="sgd-form-buttons">
+        <button type="submit" class="sgd-btn-success">Salvar</button>
+        <a asp-action="Index" class="sgd-btn-secondary">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

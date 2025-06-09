@@ -1,4 +1,6 @@
 namespace TheGuardiansEyesModel;
+using System.Text.Json.Serialization;
+
 
 public class DroneModel
 {
@@ -11,5 +13,8 @@ public class DroneModel
     public required int VelocidadeMaxima { get; set; }
     public required string Camera { get; set; }
     public required int Peso { get; set; }
-    
+
+    [JsonIgnore]
+    public ICollection<ImagensCapturadasModel>? ImagensCapturadas { get; set; }
+
 }

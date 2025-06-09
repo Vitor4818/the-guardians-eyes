@@ -1,15 +1,21 @@
 ﻿namespace TheGuardiansEyesModel;
+using System.Text.Json.Serialization;
+
 
 public class UsuarioModel
 {
 
-    public required int Id { get; set; }
-    public required string Nome { get; set; }
-    public required string Sobrenome { get; set; }
-    public required string Cpf { get; set; }
-    public required string Cargo { get; set; }
-    public required string Funcao { get; set; }
-    public required string Email { get; set; }
-    public required string Senha { get; set; }
-    
+    public int? Id { get; set; }
+    public string? Nome { get; set; }
+    public string? Sobrenome { get; set; }
+    public string? Cpf { get; set; }
+    public string? Cargo { get; set; }
+    public string? Funcao { get; set; }
+    public string? Email { get; set; }
+    public string? Senha { get; set; }
+
+    // Desastres criados/relacionados ao usuário
+    [JsonIgnore]
+    public ICollection<DesastreModel>? Desastres { get; set; }
+
 }

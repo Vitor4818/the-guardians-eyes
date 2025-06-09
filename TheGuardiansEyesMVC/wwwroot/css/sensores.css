@@ -1,0 +1,379 @@
+.sensor-wrapper {
+    max-width: 90vw;  /* limitar a largura para caber na tela */
+    padding: 2rem;
+    margin: 0 auto;   /* centraliza horizontalmente */
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.sensor-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f3d3a;
+    margin-bottom: 1.5rem;
+}
+
+/* Botão de criar */
+.sensor-create-container {
+    margin-bottom: 1.5rem;
+}
+
+.sensor-create-btn {
+    background-color: #2a9d8f;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.sensor-create-btn:hover {
+    background-color: #21867a;
+}
+
+/* Mensagem de vazio */
+.sensor-empty-msg {
+    font-style: italic;
+    color: #666;
+    margin-top: 1rem;
+}
+
+
+.sensor-table thead {
+    background-color: #1f3d3a;
+    color: white;
+}
+
+.sensor-table th,
+.sensor-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.sensor-table tr:nth-child(even) {
+    background-color: #f4f6f9;
+}
+
+/* Ações */
+.sensor-actions a {
+    color: #2a9d8f;
+    text-decoration: none;
+    font-weight: 600;
+    margin-right: 6px;
+    transition: color 0.3s ease;
+}
+
+.sensor-actions a:hover {
+    color: #21867a;
+}
+
+/* Excluir com cor diferente */
+.sensor-delete {
+    color: #d9534f;
+}
+
+.sensor-delete:hover {
+    color: #c9302c;
+}
+
+.sensor-table {
+    width: 75vw;
+    border-collapse: collapse;
+    font-size: 1rem;
+    border: 1px solid #1f3d3a;
+    margin: 0 auto;  /* Centraliza horizontalmente */
+}
+
+
+/*EDIT*/  
+/* Container do formulário */
+.form-sensor {
+    background-color: #fff;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(1, 47, 51, 0.15);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Título do formulário */
+.form-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f3d3a;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Inputs e selects padrão dentro do formulário */
+.form-sensor input[type="text"],
+.form-sensor input[type="number"],
+.form-sensor select,
+.form-sensor textarea {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #244f53;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #180d09;
+    background-color: #f9fafb;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-sensor input[type="text"]:focus,
+.form-sensor input[type="number"]:focus,
+.form-sensor select:focus,
+.form-sensor textarea:focus {
+    border-color: #2a9d8f;
+    outline: none;
+    background-color: #ffffff;
+}
+
+/* Label padrão para inputs (se usar labels) */
+.form-sensor label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    color: #244f53;
+}
+
+/* Botão submit */
+.form-sensor button[type="submit"] {
+    background-color: #2a9d8f;
+    color: #fff;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 100%;
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+}
+
+.form-sensor button[type="submit"]:hover {
+    background-color: #21867a;
+}
+
+/* Mensagem de erro (se houver validação) */
+.form-sensor .validation-message {
+    color: #d9534f;
+    font-size: 0.9rem;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+}
+
+
+/*CREATE*/
+/* Container geral do formulário */
+.container-formulario {
+    background-color: #fff;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(1, 47, 51, 0.15);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Título da página/formulário */
+.titulo-pagina {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f3d3a;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Cada campo do formulário */
+.campo-formulario {
+    margin-bottom: 1.5rem;
+}
+
+/* Label estilizado */
+.label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #244f53;
+}
+
+/* Inputs */
+.input {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #244f53;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #180d09;
+    background-color: #f9fafb;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.input:focus {
+    border-color: #2a9d8f;
+    outline: none;
+    background-color: #ffffff;
+}
+
+/* Mensagem de erro */
+.erro-validacao {
+    color: #d9534f;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.botoes {
+    display: flex;
+    gap: 1rem; /* espaço entre os botões */
+    margin-top: 1.5rem;
+}
+
+.botao {
+    flex: 1;
+    background-color: #2a9d8f;
+    color: #fff;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1.1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.botao.primario {
+    background-color: #2a9d8f;
+}
+
+.botao.primario:hover {
+    background-color: #21867a;
+}
+
+.botao.secundario {
+    background-color: #f0f0f0;
+    color: #244f53;
+    border: 1px solid #244f53;
+}
+
+.botao.secundario:hover {
+    background-color: #d9e7e5;
+    color: #1f3d3a;
+}
+
+/*DETAILS*/
+
+/* Container do card detalhes */
+.sensor-details-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 2rem;
+    max-width: 75vw;
+    margin: 2rem auto;
+    border: 1px solid #1f3d3a;
+    box-shadow: 0 2px 6px rgba(31, 61, 58, 0.15);
+    font-size: 1rem;
+}
+
+/* Título da página */
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f3d3a;
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Definições da lista de detalhes (dl) */
+.sensor-details-card dl {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Termos (dt) e descrições (dd) */
+.detail-term {
+    font-weight: 700;
+    color: #244f53;
+    width: 30%;
+    padding: 0.5rem 1rem 0.5rem 0;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.detail-desc {
+    width: 70%;
+    padding: 0.5rem 0 0.5rem 1rem;
+    color: #555;
+    box-sizing: border-box;
+}
+
+/* Botões ações - container flex com espaçamento */
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Botões estilo padrão */
+.btn {
+    flex: 1;
+    max-width: 160px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: none;
+    display: inline-block;
+}
+
+/* Botão secundário */
+.btn-secondary {
+    background-color: #f0f0f0;
+    color: #244f53;
+    border: 1px solid #244f53;
+}
+
+.btn-secondary:hover {
+    background-color: #d9e7e5;
+    color: #1f3d3a;
+}
+
+/* Botão de aviso (edição) */
+.btn-warning {
+    background-color: #f0ad4e;
+    color: white;
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #ec971f;
+}
+
+/* Botão de exclusão */
+.btn-danger {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c9302c;
+}

@@ -1,0 +1,283 @@
+/* ===== Container Geral ===== */
+.tg-list-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+/* ===== Título ===== */
+.tg-list-titulo {
+    color: #1f3d3a;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+/* ===== Link de criar ===== */
+.tg-list-create-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    background-color: #2a9d8f;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.tg-list-create-link:hover {
+    background-color: #21867a;
+}
+
+/* ===== Tabela ===== */
+.tg-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+.tg-list-table thead {
+    background-color: #1f3d3a;
+    color: white;
+}
+
+.tg-list-table th,
+.tg-list-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.tg-list-table tr:nth-child(even) {
+    background-color: #f4f6f9;
+}
+
+.tg-list-table tr:hover {
+    background-color: #e1f4f1;
+}
+
+/* ===== Botão excluir ===== */
+.tg-list-delete-btn {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.tg-list-delete-btn:hover {
+    background-color: #c9302c;
+}
+
+/* ===== Botão excluir ===== */
+.button-edit {
+    background-color: #2a9d8f;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.button-edit:hover {
+    background-color: #21867a;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px) {
+    .tg-list-table thead {
+        display: none;
+    }
+
+    .tg-list-table, .tg-list-table tbody, .tg-list-table tr, .tg-list-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .tg-list-table tr {
+        margin-bottom: 1rem;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        border-radius: 8px;
+        padding: 1rem;
+    }
+
+    .tg-list-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .tg-list-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        top: 0.75rem;
+        font-weight: bold;
+        text-align: left;
+        color: #666;
+    }
+}
+
+
+/* ===== EDIT ===== */
+
+/* ===== Container geral ===== */
+.tg-edit-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+/* ===== Título ===== */
+.tg-edit-title {
+    color: #1f3d3a;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+/* ===== Formulário ===== */
+.tg-edit-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== Grupo de campos ===== */
+.tg-edit-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.tg-edit-input {
+    padding: 0.6rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* ===== Mensagens de erro ===== */
+.tg-edit-error {
+    color: #d9534f;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+/* ===== Botão de envio ===== */
+.tg-edit-btn {
+    background-color: #2a9d8f;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.tg-edit-btn:hover {
+    background-color: #21867a;
+}
+
+/* ===== Link de voltar ===== */
+.tg-edit-back-link {
+    text-decoration: none;
+    color: #1f3d3a;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.tg-edit-back-link:hover {
+    color: #2a9d8f;
+}
+
+
+/* ===== Container geral do formulário de criação ===== */
+.tg-create-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+/* ===== Título ===== */
+.tg-create-title {
+    color: #1f3d3a;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+/* ===== Formulário ===== */
+.tg-create-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== Grupos de campos ===== */
+.tg-create-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.tg-create-input {
+    padding: 0.6rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* ===== Mensagens de erro ===== */
+.tg-create-error {
+    color: #d9534f;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+/* ===== Botão de envio ===== */
+.tg-create-btn {
+    background-color: #2a9d8f;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.tg-create-btn:hover {
+    background-color: #21867a;
+}
+
+/* ===== Link de voltar ===== */
+.tg-create-back-link {
+    text-decoration: none;
+    color: #1f3d3a;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.tg-create-back-link:hover {
+    color: #2a9d8f;
+}
+

@@ -1,0 +1,30 @@
+@model TheGuardiansEyesMVC.Models.Responses.SubGrupoDesastreResponse
+
+@{
+    ViewData["Title"] = "Detalhes do SubGrupo";
+}
+
+<h1 class="sgd-details-title">@ViewData["Title"]</h1>
+
+<div class="sgd-details-container">
+    <h4 class="sgd-details-subtitle">SubGrupo de Desastre</h4>
+    <hr class="sgd-details-hr" />
+    <dl class="sgd-details-list">
+        <dt class="sgd-details-term">Id</dt>
+        <dd class="sgd-details-desc">@Model.Id</dd>
+
+        <dt class="sgd-details-term">Subgrupo</dt>
+        <dd class="sgd-details-desc">@Model.Subgrupo</dd>
+
+        <dt class="sgd-details-term">Tipo</dt>
+        <dd class="sgd-details-desc">@Model.Tipo</dd>
+
+        <dt class="sgd-details-term">SubTipo</dt>
+        <dd class="sgd-details-desc">@Model.SubTipo</dd>
+    </dl>
+</div>
+
+<p class="sgd-details-actions">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="sgd-btn-warning">Editar</a> |
+    <a asp-action="Index" class="sgd-btn-secondary">Voltar para Lista</a>
+</p>

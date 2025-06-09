@@ -1,0 +1,44 @@
+@baseUrl = http://localhost:5193
+
+### 🟢 GET - Listar todos os SubGrupos de Desastre
+GET {{baseUrl}}/api/SubGrupoDesastre
+Accept: application/json
+
+###
+
+### 🔵 POST - Cadastrar novo SubGrupo de Desastre
+POST {{baseUrl}}/api/SubGrupoDesastre
+Content-Type: application/json
+
+{
+  "subgrupo": "Inundação Forte",
+  "tipo": "Natural",
+  "subTipo": "Inundação",
+  "grupoDesastreId": 1
+}
+
+###
+
+### 🟡 GET - Obter SubGrupo de Desastre por ID
+GET {{baseUrl}}/api/SubGrupoDesastre/1
+Accept: application/json
+
+###
+
+### 🟣 PUT - Atualizar SubGrupo de Desastre por ID
+PUT {{baseUrl}}/api/SubGrupoDesastre/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "subgrupo": "Inundação Extrema",
+  "tipo": "Natural",
+  "subTipo": "Inundação",
+  "grupoDesastreId": 33
+}
+
+###
+
+### 🔴 DELETE - Remover SubGrupo de Desastre por ID
+DELETE {{baseUrl}}/api/SubGrupoDesastre/2
+Accept: application/json

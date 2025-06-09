@@ -1,0 +1,49 @@
+@model TheGuardiansEyesModel.SensoresModel
+
+@{
+    ViewData["Title"] = "Detalhes do Sensor";
+}
+
+<h1 class="sgd-details-title">@ViewData["Title"]</h1>
+
+<div class="sgd-details-container">
+    <h4 class="sgd-details-subtitle">Detalhes do Sensor</h4>
+    <hr class="sgd-details-hr" />
+    <dl class="sgd-details-list">
+        <dt class="sgd-details-term">ID</dt>
+        <dd class="sgd-details-desc">@Model.Id</dd>
+
+        <dt class="sgd-details-term">Chip</dt>
+        <dd class="sgd-details-desc">@Model.Chip</dd>
+
+        <dt class="sgd-details-term">Modelo</dt>
+        <dd class="sgd-details-desc">@Model.Modelo</dd>
+
+        <dt class="sgd-details-term">Interface</dt>
+        <dd class="sgd-details-desc">@Model.Interface</dd>
+
+        <dt class="sgd-details-term">Utilidade</dt>
+        <dd class="sgd-details-desc">@Model.Utilidade</dd>
+
+        <dt class="sgd-details-term">Fabricante</dt>
+        <dd class="sgd-details-desc">@Model.Fabricante</dd>
+
+        <dt class="sgd-details-term">Estado</dt>
+        <dd class="sgd-details-desc">@Model.Estado</dd>
+
+        <dt class="sgd-details-term">Saída</dt>
+        <dd class="sgd-details-desc">@Model.Saida</dd>
+
+        <dt class="sgd-details-term">Tipo de Saída</dt>
+        <dd class="sgd-details-desc">@Model.TipoSaida</dd>
+
+        <dt class="sgd-details-term">Média Tensão Registrada</dt>
+        <dd class="sgd-details-desc">@Model.MediaTensaoRegistrada</dd>
+    </dl>
+</div>
+
+<p class="sgd-details-actions">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="sgd-btn-warning">Editar</a> |
+    <a asp-action="Index" class="sgd-btn-secondary">Voltar para a Lista</a> |
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="sgd-btn-danger">Excluir</a>
+</p>

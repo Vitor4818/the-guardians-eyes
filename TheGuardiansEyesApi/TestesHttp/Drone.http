@@ -1,0 +1,51 @@
+@baseUrl = http://localhost:5193
+
+### 🟢 GET - Listar todos os drones
+GET {{baseUrl}}/api/Drone
+Accept: application/json
+
+###
+
+### 🔵 POST - Cadastrar novo drone
+POST {{baseUrl}}/api/Drone
+Content-Type: application/json
+
+{
+  "id": 1,
+  "fabricante": "DJI",
+  "modelo": "Phantom 4",
+  "tempoVoo": "30 minutos",
+  "distanciaMaxima": 5000,
+  "velocidadeMaxima": 72,
+  "camera": "4K",
+  "peso": 1380
+}
+
+###
+
+### 🟡 GET - Obter drone por ID
+GET {{baseUrl}}/api/Drone/1
+Accept: application/json
+
+###
+
+### 🟣 PUT - Atualizar drone por ID
+PUT {{baseUrl}}/api/Drone/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "fabricante": "DJI",
+  "modelo": "Mavic Air 2",
+  "tempoVoo": "34 minutos",
+  "distanciaMaxima": 10000,
+  "velocidadeMaxima": 68,
+  "camera": "4K HDR",
+  "peso": 570
+}
+
+###
+
+### 🔴 DELETE - Remover drone por ID
+DELETE {{baseUrl}}/api/Drone/1
+Accept: application/json

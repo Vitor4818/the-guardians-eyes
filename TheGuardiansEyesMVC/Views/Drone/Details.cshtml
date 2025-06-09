@@ -1,0 +1,42 @@
+@model TheGuardiansEyesModel.DroneModel
+
+@{
+    ViewData["Title"] = "Detalhes do Drone";
+}
+
+<h1 class="sgd-details-title">@ViewData["Title"]</h1>
+
+<div class="sgd-details-container">
+    <h4 class="sgd-details-subtitle">Drone</h4>
+    <hr class="sgd-details-hr" />
+    <dl class="sgd-details-list">
+        <dt class="sgd-details-term">Id</dt>
+        <dd class="sgd-details-desc">@Model.Id</dd>
+
+        <dt class="sgd-details-term">Fabricante</dt>
+        <dd class="sgd-details-desc">@Model.Fabricante</dd>
+
+        <dt class="sgd-details-term">Modelo</dt>
+        <dd class="sgd-details-desc">@Model.Modelo</dd>
+
+        <dt class="sgd-details-term">Tempo de Voo</dt>
+        <dd class="sgd-details-desc">@Model.TempoVoo</dd>
+
+        <dt class="sgd-details-term">Distância Máxima</dt>
+        <dd class="sgd-details-desc">@Model.DistanciaMaxima</dd>
+
+        <dt class="sgd-details-term">Velocidade Máxima</dt>
+        <dd class="sgd-details-desc">@Model.VelocidadeMaxima</dd>
+
+        <dt class="sgd-details-term">Câmera</dt>
+        <dd class="sgd-details-desc">@Model.Camera</dd>
+
+        <dt class="sgd-details-term">Peso</dt>
+        <dd class="sgd-details-desc">@Model.Peso</dd>
+    </dl>
+</div>
+
+<p class="sgd-details-actions">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="sgd-btn-warning">Editar</a> |
+    <a asp-action="Index" class="sgd-btn-secondary">Voltar</a>
+</p>
