@@ -11,7 +11,7 @@ POST {{baseUrl}}/api/Impacto
 Content-Type: application/json
 
 {
-  "id":5,
+  "id":1,
   "impactoClassificacaoId": 1
 }
 
